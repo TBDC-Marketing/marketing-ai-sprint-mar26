@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { SLIDES, SECTIONS } from "./slides-content";
 
 // ═══════════════════════════════════════════════════════════
@@ -17,32 +18,56 @@ function usePrefersReducedMotion() {
 }
 
 // ═══════════════════════════════════════════════════════════
+// MOTION HELPERS
+// ═══════════════════════════════════════════════════════════
+const SPRING_ENTER = { type: "spring", stiffness: 300, damping: 30 };
+const SPRING_SOFT = { type: "spring", stiffness: 200, damping: 25 };
+const INSTANT = { duration: 0.06 };
+
+function springWithDelay(delay, reduced) {
+  if (reduced) return INSTANT;
+  return { ...SPRING_ENTER, delay: delay / 1000 };
+}
+
+// ═══════════════════════════════════════════════════════════
 // UTILITY: Count-up animation for metrics
 // ═══════════════════════════════════════════════════════════
-function CountUp({ target, suffix = "", duration = 800, active, reduced }) {
+function CountUp({ target, suffix = "", duration = 800, active, reduced, onComplete }) {
   const [value, setValue] = useState(0);
+  const [done, setDone] = useState(false);
   useEffect(() => {
-    if (!active) { setValue(0); return; }
-    if (reduced) { setValue(target); return; }
+    if (!active) { setValue(0); setDone(false); return; }
+    if (reduced) { setValue(target); setDone(true); return; }
     let start = null;
     const step = (ts) => {
       if (!start) start = ts;
       const progress = Math.min((ts - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       setValue(Math.round(eased * target));
-      if (progress < 1) requestAnimationFrame(step);
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        setDone(true);
+      }
     };
     requestAnimationFrame(step);
   }, [active, target, duration, reduced]);
-  return <>{value}{suffix}</>;
+  return (
+    <motion.span
+      animate={done ? { scale: [1, 1.06, 1] } : {}}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+    >
+      {value}{suffix}
+    </motion.span>
+  );
 }
 
 // ═══════════════════════════════════════════════════════════
-// UTILITY: Gold underline draw animation
+// UTILITY: Gold underline draw animation (Motion-powered)
 // ═══════════════════════════════════════════════════════════
 function GoldUnderline({ active, reduced }) {
   return (
-    <span
+    <motion.span
       className="gold-underline"
       style={{
         display: "block",
@@ -51,31 +76,111 @@ function GoldUnderline({ active, reduced }) {
         marginTop: "8px",
         borderRadius: "2px",
         transformOrigin: "left",
-        transform: active ? "scaleX(1)" : "scaleX(0)",
-        transition: reduced ? "none" : "transform var(--motion-emphasis) var(--easing-expressive)",
-        transitionDelay: reduced ? "0ms" : "200ms",
       }}
+      initial={{ scaleX: 0 }}
+      animate={active ? { scaleX: 1 } : { scaleX: 0 }}
+      transition={reduced ? INSTANT : { ...SPRING_SOFT, delay: 0.3 }}
     />
   );
 }
 
 // ═══════════════════════════════════════════════════════════
-// UTILITY: Staggered entrance wrapper
+// UTILITY: Motion entrance wrapper (replaces CSS Entrance)
 // ═══════════════════════════════════════════════════════════
 function Entrance({ active, delay = 0, reduced, children, className = "" }) {
   return (
-    <div
+    <motion.div
       className={className}
-      style={{
-        opacity: active ? 1 : 0,
-        transform: active ? "translateY(0)" : "translateY(16px)",
-        transition: reduced
-          ? "opacity 60ms"
-          : `opacity var(--motion-enter) var(--easing-standard), transform var(--motion-enter) var(--easing-standard)`,
-        transitionDelay: reduced ? "0ms" : `${delay}ms`,
-      }}
+      initial={{ opacity: 0, y: 24 }}
+      animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+      transition={springWithDelay(delay, reduced)}
     >
       {children}
+    </motion.div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
+// KINETIC TEXT: Staggered word animation for headlines
+// ═══════════════════════════════════════════════════════════
+function KineticText({ text, active, reduced, className = "", style = {} }) {
+  const words = text.split(/\s+/);
+  if (reduced) {
+    return <span className={className} style={style}>{text}</span>;
+  }
+  return (
+    <span className={className} style={{ ...style, display: "inline" }}>
+      {words.map((word, i) => (
+        <motion.span
+          key={i}
+          style={{ display: "inline-block", marginRight: "0.3em", perspective: "600px" }}
+          initial={{ opacity: 0, y: 20, rotateX: -20 }}
+          animate={active ? { opacity: 1, y: 0, rotateX: 0 } : { opacity: 0, y: 20, rotateX: -20 }}
+          transition={{
+            type: "spring",
+            stiffness: 280,
+            damping: 24,
+            delay: i * 0.05,
+          }}
+        >
+          {word}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
+// FLOATING BACKGROUND ELEMENTS (Parallax depth)
+// ═══════════════════════════════════════════════════════════
+function FloatingElements({ reduced }) {
+  if (reduced) return null;
+  const elements = [
+    { x: "15%", y: "20%", size: 180, color: "rgba(212,168,67,0.05)", duration: 7, shape: "circle" },
+    { x: "75%", y: "65%", size: 120, color: "rgba(0,131,143,0.04)", duration: 9, shape: "circle" },
+    { x: "60%", y: "15%", size: 200, color: "rgba(212,168,67,0.03)", duration: 11, shape: "ring" },
+    { x: "85%", y: "30%", size: 2, color: "rgba(212,168,67,0.06)", duration: 8, shape: "line" },
+  ];
+
+  return (
+    <div style={{ position: "absolute", inset: 0, zIndex: 1, overflow: "hidden", pointerEvents: "none" }}>
+      {elements.map((el, i) => (
+        <motion.div
+          key={i}
+          style={{
+            position: "absolute",
+            left: el.x,
+            top: el.y,
+            ...(el.shape === "circle" && {
+              width: el.size,
+              height: el.size,
+              borderRadius: "50%",
+              background: el.color,
+            }),
+            ...(el.shape === "ring" && {
+              width: el.size,
+              height: el.size,
+              borderRadius: "50%",
+              border: `1px solid ${el.color}`,
+            }),
+            ...(el.shape === "line" && {
+              width: 80,
+              height: el.size,
+              background: el.color,
+              borderRadius: 1,
+            }),
+          }}
+          animate={{
+            y: [0, -15, 0],
+            rotate: [0, el.shape === "line" ? 8 : 3, 0],
+          }}
+          transition={{
+            duration: el.duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
     </div>
   );
 }
@@ -87,9 +192,12 @@ function HeroScene({ slide, active, reduced }) {
   return (
     <div className="scene scene-hero" data-surface="dark">
       <div className="hero-bg" />
+      <FloatingElements reduced={reduced} />
       <div className="scene-content hero-content">
         <Entrance active={active} delay={0} reduced={reduced}>
-          <h1 className="type-display text-inverse">{slide.headline}</h1>
+          <h1 className="type-display text-inverse">
+            <KineticText text={slide.headline} active={active} reduced={reduced} />
+          </h1>
           {slide.headline !== "Let's Talk" && (
             <GoldUnderline active={active} reduced={reduced} />
           )}
@@ -138,6 +246,7 @@ function SectionDividerScene({ slide, active, reduced }) {
   return (
     <div className="scene scene-section-divider" data-surface="dark">
       <div className="hero-bg" />
+      <FloatingElements reduced={reduced} />
       <div className="scene-content" style={{ maxWidth: "900px" }}>
         {slide.sectionLabel && (
           <Entrance active={active} delay={0} reduced={reduced}>
@@ -146,7 +255,7 @@ function SectionDividerScene({ slide, active, reduced }) {
         )}
         <Entrance active={active} delay={80} reduced={reduced}>
           <h1 className="type-display text-inverse" style={{ fontSize: "clamp(40px, 4.5vw, 64px)" }}>
-            {slide.headline}
+            <KineticText text={slide.headline} active={active} reduced={reduced} />
           </h1>
           <GoldUnderline active={active} reduced={reduced} />
         </Entrance>
@@ -238,7 +347,11 @@ function ThesisWithExampleScene({ slide, active, reduced }) {
         )}
         {slide.example && (
           <Entrance active={active} delay={300} reduced={reduced}>
-            <div className="example-box">
+            <motion.div
+              className="example-box"
+              whileHover={reduced ? {} : { y: -2, boxShadow: "0 6px 24px rgba(10,22,40,0.12)" }}
+              transition={SPRING_SOFT}
+            >
               <span className="type-label" style={{ color: "var(--accent-brand)", marginBottom: "8px", display: "block" }}>
                 {slide.example.title}
               </span>
@@ -250,7 +363,7 @@ function ThesisWithExampleScene({ slide, active, reduced }) {
                   {slide.example.metric}
                 </span>
               )}
-            </div>
+            </motion.div>
           </Entrance>
         )}
       </div>
@@ -292,7 +405,7 @@ function ThesisWithMetricScene({ slide, active, reduced }) {
           </div>
           {slide.metric && (
             <Entrance active={active} delay={200} reduced={reduced} className="metric-callout-box">
-              <span className="type-metric" style={{ color: "var(--accent-brand)" }}>
+              <span className="type-metric metric-glow" style={{ color: "var(--accent-brand)" }}>
                 <CountUp target={slide.metric.value} suffix={slide.metric.suffix} active={active} reduced={reduced} />
               </span>
               <span className="type-caption text-secondary" style={{ display: "block", marginTop: "8px" }}>
@@ -320,7 +433,14 @@ function ProcessScene({ slide, active, reduced }) {
         </Entrance>
         <div className="process-row">
           {slide.processSteps.map((step, i) => (
-            <Entrance key={i} active={active} delay={150 + i * 80} reduced={reduced} className="process-step">
+            <motion.div
+              key={i}
+              className="process-step"
+              initial={{ opacity: 0, y: 30 }}
+              animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={springWithDelay(150 + i * 100, reduced)}
+              whileHover={reduced ? {} : { scale: 1.03 }}
+            >
               <span className="process-number">{step.number}</span>
               <span className="type-subheadline" style={{ marginTop: "12px", display: "block" }}>
                 {step.label}
@@ -328,8 +448,16 @@ function ProcessScene({ slide, active, reduced }) {
               <span className="type-caption text-secondary" style={{ marginTop: "6px", display: "block" }}>
                 {step.description}
               </span>
-              {i < slide.processSteps.length - 1 && <span className="process-connector" />}
-            </Entrance>
+              {i < slide.processSteps.length - 1 && (
+                <motion.span
+                  className="process-connector"
+                  initial={{ scaleX: 0 }}
+                  animate={active ? { scaleX: 1 } : { scaleX: 0 }}
+                  transition={reduced ? INSTANT : { ...SPRING_SOFT, delay: (250 + i * 100) / 1000 }}
+                  style={{ transformOrigin: "left" }}
+                />
+              )}
+            </motion.div>
           ))}
         </div>
         {slide.emphasis && (
@@ -359,14 +487,27 @@ function ComparisonScene({ slide, active, reduced }) {
         </Entrance>
         <div className="comparison-grid">
           {slide.columns.map((col, ci) => (
-            <Entrance key={ci} active={active} delay={150 + ci * 120} reduced={reduced} className="comparison-col">
+            <motion.div
+              key={ci}
+              className="comparison-col"
+              initial={{ opacity: 0, x: ci === 0 ? -40 : 40 }}
+              animate={active ? { opacity: 1, x: 0 } : { opacity: 0, x: ci === 0 ? -40 : 40 }}
+              transition={springWithDelay(150 + ci * 120, reduced)}
+            >
               <h3 className="type-subheadline" style={{ marginBottom: "20px", color: ci === 0 ? "var(--text-primary)" : "var(--accent-secondary)" }}>
                 {col.header}
               </h3>
               {col.items.map((item, ii) => (
-                <p key={ii} className="type-body comparison-item">{item}</p>
+                <motion.p
+                  key={ii}
+                  className="type-body comparison-item"
+                  whileHover={reduced ? {} : { x: 4, backgroundColor: "var(--surface-elevated)" }}
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                >
+                  {item}
+                </motion.p>
               ))}
-            </Entrance>
+            </motion.div>
           ))}
         </div>
         {slide.emphasis && (
@@ -401,7 +542,14 @@ function TableScene({ slide, active, reduced }) {
               <span>Target Market</span>
             </div>
             {slide.tableData.map((row, i) => (
-              <div key={i} className={`table-row ${i % 2 === 1 ? "table-row-alt" : ""}`}>
+              <motion.div
+                key={i}
+                className={`table-row ${i % 2 === 1 ? "table-row-alt" : ""}`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={active ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                transition={springWithDelay(200 + i * 50, reduced)}
+                whileHover={reduced ? {} : { x: 4, backgroundColor: "var(--surface-elevated)" }}
+              >
                 <span className="table-company">
                   <span
                     className="program-dot"
@@ -410,7 +558,7 @@ function TableScene({ slide, active, reduced }) {
                   {row.company}
                 </span>
                 <span className="type-body text-secondary">{row.target}</span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </Entrance>
@@ -436,10 +584,17 @@ function CardGridScene({ slide, active, reduced }) {
         </Entrance>
         <div className="card-grid" style={{ marginTop: "32px" }}>
           {slide.cards.map((card, i) => (
-            <Entrance key={i} active={active} delay={150 + i * 60} reduced={reduced}>
-              <div
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={active ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.95 }}
+              transition={springWithDelay(150 + i * 60, reduced)}
+            >
+              <motion.div
                 className="play-card"
                 style={{ borderLeftColor: card.program === "horizon" ? "var(--horizon-accent)" : "var(--pivot-accent)" }}
+                whileHover={reduced ? {} : { y: -4, boxShadow: "0 8px 32px rgba(10,22,40,0.16)" }}
+                transition={SPRING_SOFT}
               >
                 <span className="type-label" style={{ color: "var(--text-secondary)" }}>{card.company}</span>
                 <span className="type-body" style={{ fontWeight: 600, color: "var(--accent-brand)", marginTop: "4px", display: "block" }}>
@@ -448,8 +603,8 @@ function CardGridScene({ slide, active, reduced }) {
                 <p className="type-caption text-secondary" style={{ marginTop: "8px" }}>
                   {card.description}
                 </p>
-              </div>
-            </Entrance>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -464,23 +619,29 @@ function ActionSummaryScene({ slide, active, reduced }) {
   return (
     <div className="scene scene-action" data-surface="dark">
       <div className="hero-bg" />
+      <FloatingElements reduced={reduced} />
       <div className="scene-content" style={{ maxWidth: "900px" }}>
         <Entrance active={active} delay={0} reduced={reduced}>
           <h1 className="type-headline text-inverse">{slide.headline}</h1>
         </Entrance>
         <div style={{ marginTop: "40px" }}>
           {slide.actions.map((action, i) => (
-            <Entrance key={i} active={active} delay={150 + i * 100} reduced={reduced}>
-              <div className="action-item">
-                <span className="action-number">{action.number}</span>
-                <div>
-                  <p className="type-subheadline text-inverse" style={{ marginBottom: "6px" }}>
-                    {action.title}
-                  </p>
-                  <p className="type-body text-inverse-muted">{action.description}</p>
-                </div>
+            <motion.div
+              key={i}
+              className="action-item"
+              initial={{ opacity: 0, x: -30 }}
+              animate={active ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+              transition={springWithDelay(150 + i * 100, reduced)}
+              whileHover={reduced ? {} : { x: 8 }}
+            >
+              <span className="action-number">{action.number}</span>
+              <div>
+                <p className="type-subheadline text-inverse" style={{ marginBottom: "6px" }}>
+                  {action.title}
+                </p>
+                <p className="type-body text-inverse-muted">{action.description}</p>
               </div>
-            </Entrance>
+            </motion.div>
           ))}
         </div>
         {slide.cta && (
@@ -513,6 +674,25 @@ function SceneRouter({ slide, active, reduced }) {
     case "action-summary": return <ActionSummaryScene {...props} />;
     default: return <ThesisScene {...props} />;
   }
+}
+
+// ═══════════════════════════════════════════════════════════
+// SLIDE TRANSITION VARIANTS
+// ═══════════════════════════════════════════════════════════
+function getSlideVariants(layout, direction) {
+  const isDark = layout === "hero" || layout === "section-divider" || layout === "action-summary";
+  if (isDark) {
+    return {
+      initial: { opacity: 0, scale: 0.95 },
+      animate: { opacity: 1, scale: 1 },
+      exit: { opacity: 0, scale: 1.02 },
+    };
+  }
+  return {
+    initial: { opacity: 0, x: direction * 80 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: direction * -80 },
+  };
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -560,15 +740,18 @@ function SlideGrid({ currentIndex, onJump, onClose }) {
               <span className="type-label grid-section-label">{section.label}</span>
               <div className="grid-thumbnails">
                 {SLIDES.filter((s) => s.id >= section.range[0] && s.id <= section.range[1]).map((slide) => (
-                  <button
+                  <motion.button
                     key={slide.id}
                     className={`grid-thumb ${slide.id - 1 === currentIndex ? "grid-thumb-active" : ""}`}
                     onClick={() => { onJump(slide.id - 1); onClose(); }}
                     data-surface={slide.surface}
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.96 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   >
                     <span className="grid-thumb-num">{slide.id}</span>
                     <span className="grid-thumb-title">{slide.title}</span>
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </div>
@@ -584,11 +767,11 @@ function SlideGrid({ currentIndex, onJump, onClose }) {
 // ═══════════════════════════════════════════════════════════
 export default function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [showNotes, setShowNotes] = useState(false);
   const [showGrid, setShowGrid] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const [started, setStarted] = useState(false);
-  const [sceneActive, setSceneActive] = useState(true);
   const reduced = usePrefersReducedMotion();
 
   // Elapsed timer
@@ -615,12 +798,9 @@ export default function App() {
   const goTo = useCallback((idx) => {
     if (idx < 0 || idx >= SLIDES.length) return;
     if (!started) setStarted(true);
-    setSceneActive(false);
-    setTimeout(() => {
-      setCurrentIndex(idx);
-      setSceneActive(true);
-    }, reduced ? 30 : 120);
-  }, [started, reduced]);
+    setDirection(idx > currentIndex ? 1 : -1);
+    setCurrentIndex(idx);
+  }, [started, currentIndex]);
 
   const next = useCallback(() => goTo(currentIndex + 1), [currentIndex, goTo]);
   const prev = useCallback(() => goTo(currentIndex - 1), [currentIndex, goTo]);
@@ -656,19 +836,23 @@ export default function App() {
   );
   const nextSlide = SLIDES[currentIndex + 1];
   const progress = ((currentIndex + 1) / SLIDES.length) * 100;
+  const variants = getSlideVariants(currentSlide.layout, direction);
 
   return (
     <div className="deck-shell" onClick={handleClick}>
-      {/* Current scene */}
-      <div
-        className="scene-wrapper"
-        style={{
-          opacity: sceneActive ? 1 : 0,
-          transition: reduced ? "opacity 30ms" : "opacity 120ms var(--easing-standard)",
-        }}
-      >
-        <SceneRouter slide={currentSlide} active={sceneActive} reduced={reduced} />
-      </div>
+      {/* Current scene with AnimatePresence */}
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={currentIndex}
+          className="scene-wrapper"
+          initial={reduced ? { opacity: 0 } : variants.initial}
+          animate={reduced ? { opacity: 1 } : variants.animate}
+          exit={reduced ? { opacity: 0 } : variants.exit}
+          transition={reduced ? { duration: 0.06 } : { type: "spring", stiffness: 300, damping: 30 }}
+        >
+          <SceneRouter slide={currentSlide} active={true} reduced={reduced} />
+        </motion.div>
+      </AnimatePresence>
 
       {/* Section label — top left */}
       {currentIndex > 0 && currentSection && (
@@ -688,9 +872,13 @@ export default function App() {
         {currentIndex + 1} / {SLIDES.length}
       </div>
 
-      {/* Progress bar — bottom */}
+      {/* Progress bar — bottom (smooth with motion) */}
       <div className="chrome-progress">
-        <div className="chrome-progress-fill" style={{ width: `${progress}%` }} />
+        <motion.div
+          className="chrome-progress-fill"
+          animate={{ width: `${progress}%` }}
+          transition={reduced ? { duration: 0.06 } : { type: "spring", stiffness: 200, damping: 30 }}
+        />
       </div>
 
       {/* Presenter notes panel */}
