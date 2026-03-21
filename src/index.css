@@ -32,6 +32,7 @@
   --shadow-soft: 0 2px 8px rgba(10, 22, 40, 0.06);
   --shadow-medium: 0 4px 16px rgba(10, 22, 40, 0.1);
   --shadow-strong: 0 8px 32px rgba(10, 22, 40, 0.16);
+  --shadow-layered: 0 1px 2px rgba(10,22,40,0.04), 0 4px 12px rgba(10,22,40,0.06), 0 12px 32px rgba(10,22,40,0.08);
 
   /* Cohort */
   --horizon-accent: #00838F;
@@ -168,11 +169,46 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #0A1628 0%, #0F1D32 40%, #0A1628 100%);
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(212, 168, 67, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(0, 131, 143, 0.05) 0%, transparent 50%),
+    linear-gradient(135deg, #0A1628 0%, #0F1D32 40%, #0A1628 100%);
   z-index: 0;
+  animation: heroGradientShift 12s ease-in-out infinite alternate;
 }
 
-/* Subtle constellation ambient pattern on dark slides — very low opacity */
+@keyframes heroGradientShift {
+  0% {
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(212, 168, 67, 0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, rgba(0, 131, 143, 0.05) 0%, transparent 50%),
+      linear-gradient(135deg, #0A1628 0%, #0F1D32 40%, #0A1628 100%);
+  }
+  100% {
+    background:
+      radial-gradient(ellipse at 30% 40%, rgba(212, 168, 67, 0.08) 0%, transparent 55%),
+      radial-gradient(ellipse at 70% 60%, rgba(0, 131, 143, 0.06) 0%, transparent 45%),
+      linear-gradient(135deg, #0A1628 0%, #101E34 45%, #0A1628 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg { animation: none; }
+}
+
+/* Subtle noise texture overlay on dark slides */
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Ambient constellation pattern */
 .hero-bg::after {
   content: '';
   position: absolute;
@@ -201,6 +237,16 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
   display: block;
 }
 
+/* ─── GOLD UNDERLINE GLOW ─── */
+.gold-underline {
+  box-shadow: 0 1px 8px rgba(212, 168, 67, 0.3);
+}
+
+/* ─── METRIC GLOW ─── */
+.metric-glow {
+  text-shadow: 0 0 40px rgba(212, 168, 67, 0.2);
+}
+
 /* ─── EXAMPLE BOX ─── */
 .example-box {
   margin-top: 32px;
@@ -209,6 +255,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
   border: 1px solid var(--border-muted);
   border-left: 4px solid var(--accent-brand);
   border-radius: 8px;
+  transition: box-shadow 200ms ease;
 }
 
 /* ─── THESIS WITH METRIC — GRID ─── */
@@ -228,6 +275,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
   border-radius: 12px;
   min-width: 200px;
   text-align: center;
+  box-shadow: 0 0 40px rgba(212, 168, 67, 0.08);
 }
 @media (max-width: 900px) {
   .thesis-metric-grid {
@@ -264,6 +312,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
   color: var(--surface-inverse);
   font-weight: 800;
   font-size: 20px;
+  box-shadow: 0 2px 12px rgba(212, 168, 67, 0.25);
 }
 .process-connector {
   position: absolute;
@@ -291,12 +340,18 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
 .comparison-col {
   padding: 32px;
   border-radius: 12px;
+  transition: box-shadow 200ms ease;
 }
 .comparison-col:first-child { background: var(--surface-base); border: 1px solid var(--border-muted); }
 .comparison-col:last-child { background: var(--surface-elevated); border: 1px solid var(--border-muted); }
+.comparison-col:hover {
+  box-shadow: var(--shadow-layered);
+}
 .comparison-item {
   padding: 12px 0;
   border-bottom: 1px solid var(--border-muted);
+  border-radius: 4px;
+  transition: padding-left 150ms ease;
 }
 .comparison-item:last-child { border-bottom: none; }
 
@@ -310,6 +365,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid var(--border-muted);
+  box-shadow: var(--shadow-soft);
 }
 .table-header {
   display: grid;
@@ -328,6 +384,8 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
   padding: 14px 20px;
   align-items: center;
   border-bottom: 1px solid var(--border-muted);
+  border-radius: 0;
+  transition: background-color 150ms ease;
 }
 .table-row:last-child { border-bottom: none; }
 .table-row-alt { background: var(--surface-muted); }
@@ -344,6 +402,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
   height: 10px;
   border-radius: 50%;
   flex-shrink: 0;
+  box-shadow: 0 0 6px currentColor;
 }
 
 @media (max-width: 768px) {
@@ -368,6 +427,10 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
   border-left: 4px solid var(--horizon-accent);
   border-radius: 8px;
   box-shadow: var(--shadow-soft);
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+}
+.play-card:hover {
+  border-left-color: var(--accent-brand);
 }
 
 @media (max-width: 900px) {
@@ -380,6 +443,9 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
   gap: 20px;
   align-items: flex-start;
   margin-bottom: 28px;
+  border-radius: 8px;
+  padding: 4px 0;
+  transition: padding-left 150ms ease;
 }
 .action-number {
   display: inline-flex;
@@ -393,6 +459,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
   font-weight: 800;
   font-size: 20px;
   flex-shrink: 0;
+  box-shadow: 0 2px 12px rgba(212, 168, 67, 0.3);
 }
 
 /* ─── NAVIGATION CHROME ─── */
@@ -427,8 +494,8 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
 }
 .chrome-progress-fill {
   height: 100%;
-  background: var(--accent-brand);
-  transition: width var(--motion-emphasis) var(--easing-standard);
+  background: linear-gradient(90deg, var(--accent-brand), #E8C255);
+  box-shadow: 0 0 8px rgba(212, 168, 67, 0.4);
 }
 
 /* ─── PRESENTER NOTES PANEL ─── */
@@ -470,6 +537,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
   font-variant-numeric: tabular-nums;
   color: var(--accent-brand);
   border-bottom: 1px solid #333;
+  text-shadow: 0 0 20px rgba(212, 168, 67, 0.3);
 }
 .presenter-notes-body {
   padding: 20px;
@@ -506,6 +574,7 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 24px 80px rgba(10, 22, 40, 0.3);
 }
 .grid-header {
   padding: 20px 28px;
@@ -542,15 +611,14 @@ body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-
   align-items: center;
   justify-content: center;
   gap: 2px;
-  transition: border-color 150ms, transform 150ms;
   font-family: inherit;
 }
 .grid-thumb[data-surface="dark"] {
   background: var(--surface-inverse);
   color: var(--text-inverse);
 }
-.grid-thumb:hover { border-color: var(--accent-brand); transform: scale(1.05); }
-.grid-thumb-active { border-color: var(--accent-brand); box-shadow: 0 0 0 2px var(--accent-brand-muted); }
+.grid-thumb:hover { border-color: var(--accent-brand); }
+.grid-thumb-active { border-color: var(--accent-brand); box-shadow: 0 0 0 2px var(--accent-brand-muted), 0 0 12px rgba(212, 168, 67, 0.15); }
 .grid-thumb-num { font-weight: 700; font-size: 16px; }
 .grid-thumb-title { font-size: 10px; opacity: 0.6; text-align: center; padding: 0 4px; }
 
