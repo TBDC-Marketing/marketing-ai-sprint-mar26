@@ -35,6 +35,8 @@ function springWithDelay(delay, reduced) {
 function CountUp({ target, suffix = "", duration = 800, active, reduced, onComplete }) {
   const [value, setValue] = useState(0);
   const [done, setDone] = useState(false);
+  const isDecimal = target % 1 !== 0;
+
   useEffect(() => {
     if (!active) { setValue(0); setDone(false); return; }
     if (reduced) { setValue(target); setDone(true); return; }
@@ -43,7 +45,8 @@ function CountUp({ target, suffix = "", duration = 800, active, reduced, onCompl
       if (!start) start = ts;
       const progress = Math.min((ts - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(Math.round(eased * target));
+      const current = eased * target;
+      setValue(isDecimal ? parseFloat(current.toFixed(1)) : Math.round(current));
       if (progress < 1) {
         requestAnimationFrame(step);
       } else {
@@ -51,13 +54,14 @@ function CountUp({ target, suffix = "", duration = 800, active, reduced, onCompl
       }
     };
     requestAnimationFrame(step);
-  }, [active, target, duration, reduced]);
+  }, [active, target, duration, reduced, isDecimal]);
+
   return (
     <motion.span
       animate={done ? { scale: [1, 1.06, 1] } : {}}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      {value}{suffix}
+      {isDecimal ? value.toFixed(1) : value}{suffix}
     </motion.span>
   );
 }
@@ -538,8 +542,8 @@ function TableScene({ slide, active, reduced }) {
         <Entrance active={active} delay={150} reduced={reduced}>
           <div className="cohort-table">
             <div className="table-header">
-              <span>Company</span>
-              <span>Target Market</span>
+              <span>{slide.tableHeaders?.[0] || 'Company'}</span>
+              <span>{slide.tableHeaders?.[1] || 'Target Market'}</span>
             </div>
             {slide.tableData.map((row, i) => (
               <motion.div
@@ -596,7 +600,16 @@ function CardGridScene({ slide, active, reduced }) {
                 whileHover={reduced ? {} : { y: -4, boxShadow: "0 8px 32px rgba(10,22,40,0.16)" }}
                 transition={SPRING_SOFT}
               >
-                <span className="type-label" style={{ color: "var(--text-secondary)" }}>{card.company}</span>
+                {card.company.length === 1 ? (
+                  <span className="process-number" style={{
+                    width: 32, height: 32, fontSize: 16,
+                    marginBottom: 8, display: 'inline-flex'
+                  }}>
+                    {card.company}
+                  </span>
+                ) : (
+                  <span className="type-label" style={{ color: "var(--text-secondary)" }}>{card.company}</span>
+                )}
                 <span className="type-body" style={{ fontWeight: 600, color: "var(--accent-brand)", marginTop: "4px", display: "block" }}>
                   {card.play}
                 </span>
