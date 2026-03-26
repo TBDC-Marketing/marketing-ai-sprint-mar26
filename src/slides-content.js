@@ -299,7 +299,7 @@ export const SLIDES = [
     surface: 'dark',
     cognitiveJob: 'orient',
     sectionLabel: 'Partnerships',
-    headline: 'Partnerships do\ntrust transfer.',
+    headline: 'Partnerships\nTransfer Trust',
     body: [
       'In a new market, that is marketing.',
     ],
