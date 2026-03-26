@@ -351,7 +351,7 @@ export const SLIDES = [
     id: 17,
     section: 'ai-leverage',
     title: 'AI Search',
-    layout: 'thesis-with-metric',
+    layout: 'thesis',
     surface: 'light',
     cognitiveJob: 'dramatize',
     headline: 'If you\'re not in\nthe AI answer,\nyou don\'t exist.',
@@ -361,8 +361,7 @@ export const SLIDES = [
       'If buyers must know your brand name to find you, you are still invisible.',
       'Fastest win: publish pages AI can cite — use-case pages, comparison pages, Canadian landing pages.',
     ],
-    metric: { value: 94, suffix: '%', label: 'of B2B buyers use LLMs in purchase research' },
-    emphasis: null,
+    emphasis: 'Try it now — search your problem space plus "Canada" in ChatGPT or Perplexity. See where you show up.',
     presenterNotes: 'Lead: Dan\n\n"94% of B2B buyers now use AI during their purchase research. 72% encounter AI Overviews in their search results. The vendor ranked first on an AI-generated shortlist wins 80% of the time. Only 14% still consult analyst reports — down 60% since 2022."\n\n"Here\'s the challenge for international companies entering a new market: AI search engines synthesize from existing web content. If you don\'t have Canadian-relevant content published — Canadian case studies, Canadian landing pages, Canadian pricing — AI literally cannot recommend you for Canadian searches."\n\n"The good news: this is one of the fastest gaps to close. A well-structured Canadian use-case page can start appearing in AI results within weeks, not months."\n\n"Try it right now — search your problem space plus \'Canada\' in ChatGPT or Perplexity. See where you show up, and more importantly, who shows up instead."\n\nTransition: "This is exactly the kind of gap where AI can help you close it — which brings us to how to use AI strategically across your entire credibility framework."\nTiming: ~3 min',
   },
 
