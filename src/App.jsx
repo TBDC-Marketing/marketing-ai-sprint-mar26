@@ -251,7 +251,7 @@ function SectionDividerScene({ slide, active, reduced }) {
     <div className="scene scene-section-divider" data-surface="dark">
       <div className="hero-bg" />
       <FloatingElements reduced={reduced} />
-      <div className="scene-content" style={{ maxWidth: "900px" }}>
+      <div className="scene-content" style={{ maxWidth: "1200px" }}>
         {slide.sectionLabel && (
           <Entrance active={active} delay={0} reduced={reduced}>
             <span className="type-label section-label-inline">{slide.sectionLabel}</span>
@@ -292,7 +292,7 @@ function SectionDividerScene({ slide, active, reduced }) {
 function ThesisScene({ slide, active, reduced }) {
   return (
     <div className="scene scene-thesis" data-surface="light">
-      <div className="scene-content" style={{ maxWidth: "900px" }}>
+      <div className="scene-content" style={{ maxWidth: "1200px" }}>
         <Entrance active={active} delay={0} reduced={reduced}>
           <h1 className="type-headline">{slide.headline}</h1>
         </Entrance>
@@ -326,7 +326,7 @@ function ThesisScene({ slide, active, reduced }) {
 function ThesisWithExampleScene({ slide, active, reduced }) {
   return (
     <div className="scene scene-thesis" data-surface="light">
-      <div className="scene-content" style={{ maxWidth: "1000px" }}>
+      <div className="scene-content" style={{ maxWidth: "1300px" }}>
         <Entrance active={active} delay={0} reduced={reduced}>
           <h1 className="type-headline">{slide.headline}</h1>
         </Entrance>
@@ -381,7 +381,7 @@ function ThesisWithExampleScene({ slide, active, reduced }) {
 function ThesisWithMetricScene({ slide, active, reduced }) {
   return (
     <div className="scene scene-thesis" data-surface="light">
-      <div className="scene-content" style={{ maxWidth: "1000px" }}>
+      <div className="scene-content" style={{ maxWidth: "1300px" }}>
         <div className="thesis-metric-grid">
           <div>
             <Entrance active={active} delay={0} reduced={reduced}>
@@ -429,7 +429,7 @@ function ThesisWithMetricScene({ slide, active, reduced }) {
 function ProcessScene({ slide, active, reduced }) {
   return (
     <div className="scene scene-process" data-surface="light">
-      <div className="scene-content" style={{ maxWidth: "1100px" }}>
+      <div className="scene-content" style={{ maxWidth: "1400px" }}>
         <Entrance active={active} delay={0} reduced={reduced}>
           <h1 className="type-headline" style={{ textAlign: "center", marginBottom: "48px" }}>
             {slide.headline}
@@ -485,7 +485,7 @@ function ProcessScene({ slide, active, reduced }) {
 function ComparisonScene({ slide, active, reduced }) {
   return (
     <div className="scene scene-comparison" data-surface="light">
-      <div className="scene-content" style={{ maxWidth: "1100px" }}>
+      <div className="scene-content" style={{ maxWidth: "1400px" }}>
         <Entrance active={active} delay={0} reduced={reduced}>
           <h1 className="type-headline" style={{ marginBottom: "40px" }}>{slide.headline}</h1>
         </Entrance>
@@ -535,7 +535,7 @@ function ComparisonScene({ slide, active, reduced }) {
 function TableScene({ slide, active, reduced }) {
   return (
     <div className="scene scene-table" data-surface="light">
-      <div className="scene-content" style={{ maxWidth: "1000px" }}>
+      <div className="scene-content" style={{ maxWidth: "1300px" }}>
         <Entrance active={active} delay={0} reduced={reduced}>
           <h1 className="type-headline" style={{ marginBottom: "36px" }}>{slide.headline}</h1>
         </Entrance>
@@ -577,7 +577,7 @@ function TableScene({ slide, active, reduced }) {
 function CardGridScene({ slide, active, reduced }) {
   return (
     <div className="scene scene-cards" data-surface="light">
-      <div className="scene-content" style={{ maxWidth: "1100px" }}>
+      <div className="scene-content" style={{ maxWidth: "1400px" }}>
         <Entrance active={active} delay={0} reduced={reduced}>
           <h1 className="type-headline">{slide.headline}</h1>
           {slide.subtitle && (
@@ -633,7 +633,7 @@ function ActionSummaryScene({ slide, active, reduced }) {
     <div className="scene scene-action" data-surface="dark">
       <div className="hero-bg" />
       <FloatingElements reduced={reduced} />
-      <div className="scene-content" style={{ maxWidth: "900px" }}>
+      <div className="scene-content" style={{ maxWidth: "1200px" }}>
         <Entrance active={active} delay={0} reduced={reduced}>
           <h1 className="type-headline text-inverse">{slide.headline}</h1>
         </Entrance>
@@ -666,6 +666,263 @@ function ActionSummaryScene({ slide, active, reduced }) {
         )}
       </div>
     </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
+// HELPER COMPONENTS
+// ═══════════════════════════════════════════════════════════
+
+// Circular dot indicator (replaces HexMarker from reference)
+function DotMarker({ state = 'upcoming' }) {
+  const isCurrent = state === 'current';
+  const isComplete = state === 'complete';
+  return (
+    <span
+      style={{
+        display: 'inline-block',
+        width: isCurrent ? 12 : 10,
+        height: isCurrent ? 12 : 10,
+        borderRadius: '50%',
+        background: isCurrent
+          ? 'var(--accent-brand)'
+          : isComplete
+          ? 'rgba(212, 168, 67, 0.3)'
+          : 'rgba(255, 255, 255, 0.2)',
+        border: isCurrent
+          ? '2px solid var(--accent-brand)'
+          : isComplete
+          ? '2px solid rgba(212, 168, 67, 0.6)'
+          : '2px solid rgba(255, 255, 255, 0.25)',
+        transition: 'all 0.3s ease',
+        boxShadow: isCurrent ? '0 0 8px rgba(212, 168, 67, 0.4)' : 'none',
+        flexShrink: 0,
+      }}
+      aria-hidden="true"
+    />
+  );
+}
+
+// Toggle switch (adapted from reference — uses TBDC brand color)
+function ToggleSwitch({ enabled, onChange, label, id }) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      id={id}
+      aria-checked={enabled}
+      onClick={() => onChange(!enabled)}
+      style={{
+        position: 'relative',
+        display: 'inline-flex',
+        height: 24,
+        width: 44,
+        flexShrink: 0,
+        cursor: 'pointer',
+        borderRadius: 12,
+        border: '2px solid transparent',
+        background: enabled ? 'var(--accent-brand)' : 'rgba(255, 255, 255, 0.15)',
+        transition: 'background 0.2s ease',
+        padding: 0,
+      }}
+      aria-label={label}
+    >
+      <span
+        style={{
+          display: 'inline-block',
+          height: 20,
+          width: 20,
+          borderRadius: '50%',
+          background: '#fff',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+          transition: 'transform 0.2s ease',
+          transform: enabled ? 'translateX(20px)' : 'translateX(0)',
+          pointerEvents: 'none',
+        }}
+      />
+    </button>
+  );
+}
+
+// Fullscreen icon (unchanged from reference)
+function FullscreenIcon({ isFullscreen }) {
+  return (
+    <svg style={{ width: 16, height: 16 }} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {isFullscreen ? (
+        <><path d="M6 2H2v4" /><path d="M10 2h4v4" /><path d="M6 14H2v-4" /><path d="M10 14h4v-4" /></>
+      ) : (
+        <><path d="M2 6V2h4" /><path d="M14 6V2h-4" /><path d="M2 10v4h4" /><path d="M14 10v4h-4" /></>
+      )}
+    </svg>
+  );
+}
+
+// Arrow icon (unchanged from reference)
+function ArrowIcon({ direction = 'right' }) {
+  const rotations = { right: 'rotate(0deg)', left: 'rotate(180deg)', up: 'rotate(-90deg)', down: 'rotate(90deg)' };
+  return (
+    <svg style={{ width: 16, height: 16, transform: rotations[direction] }} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 10h12" /><path d="m10 4 6 6-6 6" />
+    </svg>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════
+// NAVIGATION CONTROLS
+// ═══════════════════════════════════════════════════════════
+function NavigationControls({
+  slides,
+  currentIndex,
+  onNavigate,
+  isOpen,
+  onToggle,
+  arrowNavEnabled,
+  onToggleArrowNav,
+  isFullscreen,
+  onToggleFullscreen,
+}) {
+  const current = slides[currentIndex];
+  const totalSlides = slides.length;
+
+  return (
+    <>
+      {/* Desktop: bottom-right floating panel */}
+      <div className="nav-controls-desktop">
+        {isOpen ? (
+          <div className="nav-panel">
+            {/* Header */}
+            <div className="nav-panel-header">
+              <span className="nav-panel-label">Presenter controls</span>
+              <button
+                type="button"
+                onClick={onToggle}
+                className="nav-panel-close"
+                aria-label="Close navigation (Escape)"
+              >
+                <svg style={{ width: 14, height: 14 }} viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+                  <path d="M1 1l12 12M13 1L1 13" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Current slide + counter */}
+            <div className="nav-panel-info">
+              <div>
+                <p className="nav-panel-slide-title">{current.title}</p>
+                <p className="nav-panel-slide-section">{current.section}</p>
+              </div>
+              <div className="nav-panel-counter">
+                <div className="nav-panel-counter-label">Slide</div>
+                <div className="nav-panel-counter-number">
+                  {String(currentIndex + 1).padStart(2, '0')}
+                  <span style={{ color: 'rgba(255,255,255,0.25)' }}>/{String(totalSlides).padStart(2, '0')}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Prev / Next */}
+            <div className="nav-panel-buttons">
+              <button
+                type="button"
+                className="nav-btn"
+                disabled={currentIndex === 0}
+                onClick={() => onNavigate(currentIndex - 1)}
+              >
+                <ArrowIcon direction="left" /> Prev
+              </button>
+              <button
+                type="button"
+                className="nav-btn"
+                disabled={currentIndex === totalSlides - 1}
+                onClick={() => onNavigate(currentIndex + 1)}
+              >
+                Next <ArrowIcon direction="right" />
+              </button>
+            </div>
+
+            {/* Settings */}
+            <div className="nav-panel-settings">
+              <div className="nav-panel-setting-row">
+                <div>
+                  <p className="nav-panel-setting-label">Arrow key navigation</p>
+                  <p className="nav-panel-setting-hint">Left / Right arrows move between slides</p>
+                </div>
+                <ToggleSwitch enabled={arrowNavEnabled} onChange={onToggleArrowNav} label="Arrow key navigation" id="arrow-nav-toggle" />
+              </div>
+              <button type="button" className="nav-btn nav-btn-full" onClick={onToggleFullscreen} aria-pressed={isFullscreen}>
+                <FullscreenIcon isFullscreen={isFullscreen} />
+                {isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+              </button>
+            </div>
+
+            {/* Slide dot map */}
+            <div className="nav-panel-dots">
+              {slides.map((slide, index) => {
+                const state = index === currentIndex ? 'current' : index < currentIndex ? 'complete' : 'upcoming';
+                return (
+                  <button
+                    key={slide.id}
+                    type="button"
+                    onClick={() => onNavigate(index)}
+                    className="nav-dot-btn"
+                    aria-label={`Jump to slide ${index + 1}: ${slide.title}`}
+                    title={`${index + 1}. ${slide.title}`}
+                  >
+                    <DotMarker state={state} />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          /* Collapsed pill */
+          <button
+            type="button"
+            onClick={onToggle}
+            className="nav-pill"
+            aria-label="Open presenter navigation (N)"
+            title="Press N to toggle"
+          >
+            <DotMarker state="current" />
+            <div style={{ textAlign: 'left' }}>
+              <p className="nav-pill-title">{current.title}</p>
+              <p className="nav-pill-counter">
+                {String(currentIndex + 1).padStart(2, '0')}/{String(totalSlides).padStart(2, '0')} · N
+                {arrowNavEnabled && ' · Keys'}
+              </p>
+            </div>
+          </button>
+        )}
+      </div>
+
+      {/* Mobile: fixed bottom bar */}
+      <div className="nav-controls-mobile">
+        <div className="nav-mobile-bar">
+          <button
+            type="button"
+            className="nav-btn nav-btn-mobile"
+            disabled={currentIndex === 0}
+            onClick={() => onNavigate(currentIndex - 1)}
+            aria-label="Previous slide"
+          >
+            <ArrowIcon direction="left" />
+          </button>
+          <div style={{ textAlign: 'center', minWidth: 0 }}>
+            <p className="nav-mobile-section">{current.section}</p>
+            <p className="nav-mobile-title">{current.title}</p>
+          </div>
+          <button
+            type="button"
+            className="nav-btn nav-btn-mobile"
+            disabled={currentIndex === totalSlides - 1}
+            onClick={() => onNavigate(currentIndex + 1)}
+            aria-label="Next slide"
+          >
+            <ArrowIcon direction="right" />
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -785,6 +1042,9 @@ export default function App() {
   const [showGrid, setShowGrid] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const [started, setStarted] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
+  const [arrowNavEnabled, setArrowNavEnabled] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const reduced = usePrefersReducedMotion();
 
   // Elapsed timer
@@ -793,6 +1053,19 @@ export default function App() {
     const interval = setInterval(() => setElapsed((e) => e + 1), 1000);
     return () => clearInterval(interval);
   }, [started]);
+
+  useEffect(() => {
+    const onChange = () => setIsFullscreen(Boolean(document.fullscreenElement));
+    document.addEventListener('fullscreenchange', onChange);
+    return () => document.removeEventListener('fullscreenchange', onChange);
+  }, []);
+
+  const toggleFullscreen = async () => {
+    try {
+      if (!document.fullscreenElement) await document.documentElement.requestFullscreen();
+      else await document.exitFullscreen();
+    } catch (err) { console.error(err); }
+  };
 
   // Hash-based deep linking
   useEffect(() => {
@@ -821,27 +1094,29 @@ export default function App() {
   // Keyboard navigation
   useEffect(() => {
     const handler = (e) => {
+      if (e.key === "Escape" && navOpen) { setNavOpen(false); return; }
       if (showGrid && e.key === "Escape") { setShowGrid(false); return; }
       if (showNotes && e.key === "Escape") { setShowNotes(false); return; }
+      if ((e.key === "f" || e.key === "F") && !showGrid && !showNotes) { e.preventDefault(); toggleFullscreen(); return; }
       switch (e.key) {
-        case "ArrowRight": case " ": e.preventDefault(); next(); break;
-        case "ArrowLeft": e.preventDefault(); prev(); break;
-        case "n": case "N": setShowNotes((s) => !s); break;
+        case "ArrowRight": case " ": e.preventDefault(); if (arrowNavEnabled || e.key === " ") next(); break;
+        case "ArrowLeft": e.preventDefault(); if (arrowNavEnabled) prev(); break;
+        case "n": case "N": setNavOpen((s) => !s); break;
         case "g": case "G": setShowGrid((s) => !s); break;
         default: break;
       }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [next, prev, showGrid, showNotes]);
+  }, [next, prev, showGrid, showNotes, navOpen, arrowNavEnabled]);
 
   // Click navigation
   const handleClick = useCallback((e) => {
-    if (showGrid || showNotes) return;
+    if (showGrid || showNotes || navOpen) return;
     if (e.target.closest("button, a, .presenter-panel")) return;
     const x = e.clientX / window.innerWidth;
     if (x > 0.4) next(); else prev();
-  }, [next, prev, showGrid, showNotes]);
+  }, [next, prev, showGrid, showNotes, navOpen]);
 
   const currentSlide = SLIDES[currentIndex];
   const currentSection = SECTIONS.find(
@@ -912,6 +1187,18 @@ export default function App() {
           onClose={() => setShowGrid(false)}
         />
       )}
+
+      <NavigationControls
+        slides={SLIDES}
+        currentIndex={currentIndex}
+        onNavigate={goTo}
+        isOpen={navOpen}
+        onToggle={() => setNavOpen(v => !v)}
+        arrowNavEnabled={arrowNavEnabled}
+        onToggleArrowNav={setArrowNavEnabled}
+        isFullscreen={isFullscreen}
+        onToggleFullscreen={toggleFullscreen}
+      />
     </div>
   );
 }
