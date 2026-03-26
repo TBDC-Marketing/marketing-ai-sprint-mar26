@@ -1,5 +1,5 @@
 // slides-content.js
-// FINAL VERSION — 22 slides for "Marketing Leverage in 2026"
+// FINAL VERSION — 23 slides for "Marketing Leverage in 2026"
 // Sprint Week Lunch & Learn | Thursday, March 26, 2026
 // Dan Flatt, Senior Director of Marketing | TBDC
 //
@@ -7,18 +7,18 @@
 // Copy this file to src/slides-content.js in the project.
 
 export const SECTIONS = [
-  { id: 'opening', label: 'Opening', range: [1, 5] },
-  { id: 'pmf', label: 'PMF', range: [6, 9] },
-  { id: 'canada', label: 'Canada', range: [10, 14] },
+  { id: 'opening', label: 'Opening', range: [1, 3] },
+  { id: 'pmf', label: 'PMF', range: [4, 8] },
+  { id: 'canada', label: 'Canada', range: [9, 14] },
   { id: 'partnerships', label: 'Partnerships', range: [15, 16] },
-  { id: 'ai-leverage', label: 'AI Leverage', range: [17, 20] },
-  { id: 'action-plan', label: 'Action Plan', range: [21, 22] },
+  { id: 'ai-leverage', label: 'AI Leverage', range: [17, 21] },
+  { id: 'action-plan', label: 'Action Plan', range: [22, 23] },
 ];
 
 export const SLIDES = [
 
   // ═══════════════════════════════════════════════════════════
-  // OPENING (Slides 1–5)
+  // OPENING (Slides 1–3)
   // ═══════════════════════════════════════════════════════════
 
   {
@@ -53,51 +53,8 @@ export const SLIDES = [
     presenterNotes: 'Lead: Dan\n\n"Take out your phones. Open your homepage. Look at it like a Canadian enterprise buyer who has never heard of you. Answer these three questions honestly." Pause for 20–30 seconds. Let the room sit with it.\n\n"This is the lens Canadian buyers use. Not your pitch deck. Not your roadmap. Your public surface."\n\nTransition: "Now let me show you what the cohort data says when buyers do exactly that test."\nTiming: ~2 min',
   },
 
-  // ── NEW: Audit Rubric + Methodology (Slides 3–4) ──
-
   {
     id: 3,
-    section: 'opening',
-    title: 'Audit Rubric',
-    layout: 'card-grid',
-    surface: 'light',
-    cognitiveJob: 'orient',
-    headline: 'How We Audited Your\nMarket Readiness',
-    cards: [
-      { company: '1', play: 'Website Positioning Clarity', description: 'Can a Canadian buyer understand who you serve and why you\'re different within 10 seconds?', program: 'horizon' },
-      { company: '2', play: 'Trust & Social Proof', description: 'Named case studies, customer logos, third-party reviews, partner ecosystem visibility.', program: 'horizon' },
-      { company: '3', play: 'Canadian Market Readiness', description: 'Canada-specific content, local entity, CAD pricing, Canadian references, compliance signals.', program: 'pivot' },
-      { company: '4', play: 'Founder & LinkedIn Presence', description: 'Would a buyer who checks LinkedIn after an intro feel confident taking the meeting?', program: 'pivot' },
-      { company: '5', play: 'Content & Thought Leadership', description: 'Do you produce content that positions you as an authority findable by NA buyers?', program: 'horizon' },
-      { company: '6', play: 'AI Search Visibility', description: 'When buyers search your problem space in ChatGPT or Perplexity, do you appear?', program: 'horizon' },
-      { company: '7', play: 'Conversion Infrastructure', description: 'Demo booking, pricing clarity, calendar integration — can an interested buyer take the next step?', program: 'pivot' },
-      { company: '8', play: 'Competitive Differentiation', description: 'Does your public messaging clearly differentiate you from the alternatives a Canadian buyer would also evaluate?', program: 'pivot' },
-    ],
-    presenterNotes: 'Lead: Dan\n\n"Before I show you the results, let me walk you through what we actually measured. We built an 8-category rubric specifically designed to evaluate how your digital presence looks to a Canadian B2B buyer — not how good your product is, but how ready your public surface is for this market."\n\n"Each category is scored 1 to 5. A 1 means a critical gap that would actively hurt your credibility. A 5 means best-in-class — a Canadian buyer would be impressed."\n\nWalk through the 8 categories briefly — point to each card. Don\'t linger. The goal is to establish the framework so the data on the next slides has context.\n\nTransition: "Here\'s how the research worked."\nTiming: ~2.5 min',
-  },
-
-  {
-    id: 4,
-    section: 'opening',
-    title: 'Methodology',
-    layout: 'thesis-with-example',
-    surface: 'light',
-    cognitiveJob: 'orient',
-    headline: 'We used AI Deep Research\nto audit each company.',
-    body: [
-      'We examined your websites, LinkedIn profiles, AI search visibility, and competitive positioning through the lens of a Canadian enterprise buyer.',
-      'We cross-referenced our findings with the Scout Reports our programming team prepared for each of you before Sprint Week.',
-    ],
-    emphasis: 'You will each receive your full audit report, the rubric, and the methodology — including the AI research prompts we used.',
-    example: {
-      title: 'What you\'ll receive',
-      body: 'Your individual marketing audit report with scores across all 8 categories, specific observations with evidence, actionable recommendations, and the complete rubric and AI Deep Research prompts so you can re-run this analysis as your Canadian presence evolves.',
-    },
-    presenterNotes: 'Lead: Dan\n\n"We didn\'t just look at your websites casually. We ran structured AI Deep Research prompts against each of your companies — examining your sites, your LinkedIn presence, your AI search visibility, and your competitive positioning, all through the lens of a Canadian buyer who\'s never heard of you."\n\n"We also cross-referenced with the Scout Reports that our programming team built for each of you — the market feasibility, competitive landscape, and readiness assessments you received before Sprint Week."\n\n"After this session, you\'ll each get your individual report with all 8 scores, specific observations, and concrete recommendations. You\'ll also get the rubric itself and the research prompts, so you can re-run this audit as your Canadian presence improves."\n\nTransition: "Now let me show you what we found."\nTiming: ~2 min',
-  },
-
-  {
-    id: 5,
     section: 'opening',
     title: 'Cohort Data',
     layout: 'thesis-with-metric',
@@ -105,10 +62,11 @@ export const SLIDES = [
     cognitiveJob: 'orient',
     headline: 'Biggest gaps\nacross the cohort',
     body: [
-      'Ten of eleven companies scored 2 or below on Canadian readiness.',
-      'Nine of eleven scored 2 or below on AI search visibility.',
-      'No company scored above 3 on conversion infrastructure.',
-      'Most of you are not being rejected because your product is weak. You\'re being slowed down because your external story doesn\'t yet say: we are relevant here, trusted here, and easy to buy from here.',
+      'We used AI Deep Research to audit all 11 companies across 8 dimensions -- website positioning, trust signals, Canadian readiness, AI visibility, conversion infrastructure, LinkedIn presence, content authority, and competitive differentiation. Each scored 1-5.',
+      'Canadian market readiness: 1.9/5 -- 10 of 11 scored 2 or below.',
+      'AI search visibility: 2.0/5 -- 9 of 11 scored 2 or below.',
+      'Conversion infrastructure: 2.5/5 -- no company scored above 3.',
+      'This is not a product problem. You\'re being slowed down because your external story doesn\'t yet say: we are relevant here, trusted here, and easy to buy from here.',
     ],
     metric: { value: 1.9, suffix: '/5', label: 'Average Canadian market readiness score' },
     emphasis: null,
@@ -116,11 +74,11 @@ export const SLIDES = [
   },
 
   // ═══════════════════════════════════════════════════════════
-  // PMF AS FOUNDATION (Slides 6–9)
+  // PMF AS FOUNDATION (Slides 4–8)
   // ═══════════════════════════════════════════════════════════
 
   {
-    id: 6,
+    id: 4,
     section: 'pmf',
     title: 'PMF First',
     layout: 'section-divider',
@@ -137,7 +95,7 @@ export const SLIDES = [
   },
 
   {
-    id: 7,
+    id: 5,
     section: 'pmf',
     title: 'The PMF Test',
     layout: 'process',
@@ -154,7 +112,7 @@ export const SLIDES = [
   },
 
   {
-    id: 8,
+    id: 6,
     section: 'pmf',
     title: 'Four PMF Questions',
     layout: 'card-grid',
@@ -171,7 +129,7 @@ export const SLIDES = [
   },
 
   {
-    id: 9,
+    id: 7,
     section: 'pmf',
     title: 'SaaS Apocalypse',
     layout: 'thesis-with-example',
@@ -187,12 +145,31 @@ export const SLIDES = [
     presenterNotes: 'Lead: Dan\n\n"We are entering what some call the \'SaaS Apocalypse.\' The real threat isn\'t that SaaS is dead — it\'s that shallow, easy-to-replicate products are increasingly vulnerable."\n\nCohort tie-ins: "Fermi Dev — your moat isn\'t the dashboard, it\'s encoding complex manufacturing workflows that an intern with ChatGPT can\'t safely replicate. Quanscient — your moat is simulation depth, not \'AI.\' WIDMO — hard-to-reproduce subsurface insight and deployment credibility. xTiles needs to articulate team workflow and business outcomes more clearly."\n\nTransition: "So you need defensible PMF. But even with a great product, how you package it for Canada changes everything."\nTiming: ~3 min',
   },
 
+  {
+    id: 8,
+    section: 'pmf',
+    title: 'Enterprise Translation Gap',
+    layout: 'thesis-with-example',
+    surface: 'light',
+    cognitiveJob: 'dramatize',
+    headline: 'Strong Product \u2260\nEnterprise Trust',
+    body: [
+      'If your homepage talks to end users, enterprise buyers, partners, and investors all at once -- it lands with none of them.',
+    ],
+    emphasis: 'A real pattern from this cohort\'s audits: companies scoring 4/5 on content & differentiation scored 2/5 on enterprise buyer clarity.',
+    example: {
+      title: 'The Enterprise Translation Gap',
+      body: 'A homepage that speaks beautifully to individual users -- designers, productivity enthusiasts, technical practitioners -- but when a Canadian VP of Product or Head of Operations lands on that same page, they don\'t see an enterprise solution. They see a personal tool. The product might be incredible for teams, but the story being told is an individual story. In a new market with zero brand recognition, that dilution is fatal.',
+    },
+    presenterNotes: 'New slide -- see printed speaker notes for full talking track.',
+  },
+
   // ═══════════════════════════════════════════════════════════
-  // WHAT CHANGES IN CANADA (Slides 10–14)
+  // WHAT CHANGES IN CANADA (Slides 9–14)
   // ═══════════════════════════════════════════════════════════
 
   {
-    id: 10,
+    id: 9,
     section: 'canada',
     title: 'What Changes',
     layout: 'section-divider',
@@ -208,6 +185,24 @@ export const SLIDES = [
   },
 
   {
+    id: 10,
+    section: 'canada',
+    title: 'Home vs. North America',
+    layout: 'table',
+    surface: 'light',
+    cognitiveJob: 'compare',
+    headline: 'What Changes\nWhen You Cross the Border',
+    tableData: [
+      { company: 'Narrative', target: 'Home: Product-first --> NA: Vision & ROI-first', program: 'horizon' },
+      { company: 'Sales Motion', target: 'Home: Relationship-driven --> NA: Digital-first, speed-to-value', program: 'horizon' },
+      { company: 'Trust', target: 'Home: Home-country traction --> NA: Local proof & partners', program: 'pivot' },
+      { company: 'Compliance', target: 'Home: Back-office detail --> NA: Front-of-site marketing asset', program: 'pivot' },
+    ],
+    tableHeaders: ['Dimension', 'What Changes'],
+    presenterNotes: 'New slide -- see printed speaker notes for full talking track.',
+  },
+
+  {
     id: 11,
     section: 'canada',
     title: 'Credibility Framework',
@@ -216,9 +211,9 @@ export const SLIDES = [
     cognitiveJob: 'explain',
     headline: 'The 3-Layer\nCredibility Framework',
     processSteps: [
-      { number: '1', label: 'Visibility', description: 'Can buyers find you?' },
-      { number: '2', label: 'Trust Signals', description: 'Do buyers believe you?' },
-      { number: '3', label: 'Conversion Readiness', description: 'Can buyers act now?' },
+      { number: '1', label: 'Visibility', description: 'Can buyers find you? (AI search, website, LinkedIn, associations)' },
+      { number: '2', label: 'Trust Signals', description: 'Do buyers believe you? (Local references, partner logos, compliance, founder alignment)' },
+      { number: '3', label: 'Conversion Readiness', description: 'Can buyers act now? (Demo booking, CAD pricing, timezone-friendly calendar, pilot docs)' },
     ],
     emphasis: 'You can\'t skip from visibility to purchase. And you can\'t solve conversion if trust is missing.',
     presenterNotes: 'Lead: Dan\n\nLayer 1 — Visibility: "If they search your problem space in ChatGPT, do you show up? Canadian-localized site? LinkedIn showing Canadian activity?"\n\nLayer 2 — Trust Signals: "Canadian reference? Local partner logo? Compliance front-and-center? For EU founders: signaling CETA eligibility?"\n\nLayer 3 — Conversion Readiness: "Clear enterprise buying path? Demo booking in EST/PST? CAD pricing? Or generic contact form going to a European phone number?"\n\nCohort tie-in: "VEMOCO scores well — Toronto address, local contact, procurement visibility. For many of you, your founder LinkedIn is more credible than your homepage — a strength and a gap."\n\nTransition: "Let\'s ground each layer in the data."\nTiming: ~3 min',
@@ -270,7 +265,7 @@ export const SLIDES = [
         ],
       },
     ],
-    emphasis: '94% of buyers use AI in research. The vendor ranked first wins 80% of the time.',
+    emphasis: '94% of buyers use AI in research. The vendor ranked first on the preliminary shortlist wins 80% of the time.',
     presenterNotes: 'Lead: Dan\n\n"94% now use AI during research. 90% conduct research before ever speaking to you. The vendor ranked first on a shortlist wins 80% of the time."\n\n"Compliance isn\'t a back-office detail — it\'s a marketing asset. PIPEDA, data residency, SOC2 need to be front-and-center."\n\n"51% of buyers conduct \'backchannel research\' through personal networks. They\'re asking: \'Has anyone worked with this European company?\' If the answer is silence, that\'s a credibility gap. TBDC\'s introductions fill exactly that silence."\n\nTransition: "There\'s also a major regulatory shift you need to know about."\nTiming: ~3 min',
   },
 
@@ -286,10 +281,11 @@ export const SLIDES = [
       {
         header: 'Horizon (EU)',
         items: [
-          'CETA provides reciprocal access to Canadian procurement',
+          'CETA provides reciprocal access -- signal this clearly on your site',
           'Can bid on federal, provincial, and municipal tenders',
           'A structural advantage over non-treaty competitors',
           'Signal this on your website and in proposals',
+          'Buy Canadian Policy (Dec 2025): 10% evaluation advantage for Canadian suppliers. Threshold drops to $5M by June.',
         ],
       },
       {
@@ -302,7 +298,7 @@ export const SLIDES = [
         ],
       },
     ],
-    emphasis: 'For both: local proof + partner path still matter.',
+    emphasis: 'For both: regardless of procurement policy, local proof + partner path still matter.',
     presenterNotes: 'Lead: Dan\n\n"Canada implemented Buy Canadian Policy effective Dec 2025. Federal procurement now gives 10% evaluation advantage to Canadian suppliers. Threshold drops from $25M to $5M by June 2026. Covers ICT, infrastructure, defence, health."\n\n"For Horizon founders: CETA gives you reciprocal access at federal, provincial, and municipal levels. A real structural advantage."\n\n"For Pivot founders: India doesn\'t have treaty cover. Focus on private-sector credibility and partnering with established Canadian entities."\n\n"For both groups: can a Canadian buyer see a clear local route to pilot, compliance review, or purchase?"\n\nCohort tie-ins: WIDMO, Voltie, Quanscient may benefit from public-sector framing. Omniful, Aibo, MonkTrader need private-sector proof first.\n\nTransition: "If you don\'t have local trust yet, how do you get it? You borrow it."\nTiming: ~3 min',
   },
 
@@ -340,12 +336,12 @@ export const SLIDES = [
       { number: '3', label: 'Channel Partner', description: 'Proof opens doors' },
       { number: '4', label: 'Co-Marketing', description: 'When the story is real' },
     ],
-    emphasis: 'The first partner has one job: make you referenceable in Canada.',
+    emphasis: 'The first partner has one job: make you referenceable in Canada. Example: You find one Canadian pilot customer -> get results and permission to use their name -> approach a local integrator with proof -> co-publish the case study. That\'s the full sequence.',
     presenterNotes: 'Lead: Dan\n\n"Start with a partner who helps you get proof, not scale. Convert into a named reference. Use proof to open channel partnerships. Co-market when the story is real."\n\n"Sprint Week creates meetings. Surge is where relationships become market infrastructure. Your fractional executives can help negotiate and execute."\n\nCohort tie-ins: VEMOCO is ahead on Canada trust — can tighten conversion. Product-led platforms (Omniful, TryNdBuy, xTiles) especially need enterprise-translation partners.\n\nTransition: "Once PMF and credibility are clearer, AI becomes much more powerful."\nTiming: ~2.5 min',
   },
 
   // ═══════════════════════════════════════════════════════════
-  // AI AS LEVERAGE (Slides 17–20)
+  // AI AS LEVERAGE (Slides 17–21)
   // ═══════════════════════════════════════════════════════════
 
   {
@@ -369,6 +365,23 @@ export const SLIDES = [
   {
     id: 18,
     section: 'ai-leverage',
+    title: 'Where AI Helps',
+    layout: 'card-grid',
+    surface: 'light',
+    cognitiveJob: 'explain',
+    headline: 'Where AI\nEarns Its Keep',
+    cards: [
+      { company: 'Research', play: 'Weeks -> Hours', description: 'Competitor scans, account intelligence, local buyer language, partner mapping.', program: 'horizon' },
+      { company: 'Personalization', play: '50 Deep > 5,000 Generic', description: 'Deep-context messages that reference prospect challenges, tech stack, and competitive position.', program: 'horizon' },
+      { company: 'Content Multiplication', play: '1 Insight -> 8 Assets', description: 'Blog, LinkedIn post, email sequence, pitch slide, landing page, comparison page, one-pager, use-case page.', program: 'pivot' },
+      { company: 'Pattern Recognition', play: 'Weekly Pipeline Readouts', description: 'What messages get opened? What segments respond? What objections keep appearing?', program: 'pivot' },
+    ],
+    presenterNotes: 'New slide -- see printed speaker notes for full talking track.',
+  },
+
+  {
+    id: 19,
+    section: 'ai-leverage',
     title: 'AI Search',
     layout: 'thesis-with-metric',
     surface: 'light',
@@ -386,7 +399,7 @@ export const SLIDES = [
   },
 
   {
-    id: 19,
+    id: 20,
     section: 'ai-leverage',
     title: 'AI Plays — Horizon',
     layout: 'card-grid',
@@ -406,7 +419,7 @@ export const SLIDES = [
   },
 
   {
-    id: 20,
+    id: 21,
     section: 'ai-leverage',
     title: 'AI Plays — Pivot',
     layout: 'card-grid',
@@ -425,11 +438,11 @@ export const SLIDES = [
   },
 
   // ═══════════════════════════════════════════════════════════
-  // ACTION PLAN & CLOSE (Slides 21–22)
+  // ACTION PLAN & CLOSE (Slides 22–23)
   // ═══════════════════════════════════════════════════════════
 
   {
-    id: 21,
+    id: 22,
     section: 'action-plan',
     title: 'Action Plan',
     layout: 'action-summary',
@@ -458,7 +471,7 @@ export const SLIDES = [
   },
 
   {
-    id: 22,
+    id: 23,
     section: 'action-plan',
     title: 'Close',
     layout: 'hero',
