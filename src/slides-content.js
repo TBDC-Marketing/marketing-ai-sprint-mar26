@@ -1,24 +1,24 @@
 // slides-content.js
-// FINAL VERSION — 23 slides for "Marketing Leverage in 2026"
+// FINAL VERSION — 21 slides for "Marketing Leverage in 2026"
 // Sprint Week Lunch & Learn | Thursday, March 26, 2026
 // Dan Flatt, Senior Director of Marketing | TBDC
 //
-// REPLACES the previous 26-slide version entirely.
+// REPLACES the previous version entirely.
 // Copy this file to src/slides-content.js in the project.
 
 export const SECTIONS = [
-  { id: 'opening', label: 'Opening', range: [1, 3] },
-  { id: 'pmf', label: 'PMF', range: [4, 8] },
-  { id: 'canada', label: 'Canada', range: [9, 14] },
-  { id: 'partnerships', label: 'Partnerships', range: [15, 16] },
-  { id: 'ai-leverage', label: 'AI Leverage', range: [17, 21] },
-  { id: 'action-plan', label: 'Action Plan', range: [22, 23] },
+  { id: 'opening', label: 'Opening', range: [1, 4] },
+  { id: 'pmf', label: 'PMF', range: [5, 8] },
+  { id: 'canada', label: 'Canada', range: [9, 13] },
+  { id: 'partnerships', label: 'Partnerships', range: [14, 15] },
+  { id: 'ai-leverage', label: 'AI Leverage', range: [16, 19] },
+  { id: 'action-plan', label: 'Action Plan', range: [20, 21] },
 ];
 
 export const SLIDES = [
 
   // ═══════════════════════════════════════════════════════════
-  // OPENING (Slides 1–3)
+  // OPENING (Slides 1–4)
   // ═══════════════════════════════════════════════════════════
 
   {
@@ -56,29 +56,52 @@ export const SLIDES = [
   {
     id: 3,
     section: 'opening',
-    title: 'Cohort Data',
-    layout: 'thesis-with-metric',
+    title: 'Audit Rubric',
+    layout: 'card-grid',
     surface: 'light',
     cognitiveJob: 'orient',
-    headline: 'Biggest gaps\nacross the cohort',
-    body: [
-      'We used AI Deep Research to audit all 11 companies across 8 dimensions -- website positioning, trust signals, Canadian readiness, AI visibility, conversion infrastructure, LinkedIn presence, content authority, and competitive differentiation. Each scored 1-5.',
-      'Canadian market readiness: 1.9/5 -- 10 of 11 scored 2 or below.',
-      'AI search visibility: 2.0/5 -- 9 of 11 scored 2 or below.',
-      'Conversion infrastructure: 2.5/5 -- no company scored above 3.',
-      'This is not a product problem. You\'re being slowed down because your external story doesn\'t yet say: we are relevant here, trusted here, and easy to buy from here.',
+    headline: 'The 8 Factors\nCanadian Buyers Evaluate',
+    cards: [
+      { company: '1', play: 'Website Positioning Clarity', description: 'Can a Canadian buyer understand who you serve and why you\'re different within 10 seconds?', program: 'horizon' },
+      { company: '2', play: 'Trust & Social Proof', description: 'Named case studies, customer logos, third-party reviews, partner ecosystem visibility.', program: 'horizon' },
+      { company: '3', play: 'Canadian Market Readiness', description: 'Canada-specific content, local entity, CAD pricing, Canadian references, compliance signals.', program: 'pivot' },
+      { company: '4', play: 'Founder & LinkedIn Presence', description: 'Would a buyer who checks LinkedIn after an intro feel confident taking the meeting?', program: 'pivot' },
+      { company: '5', play: 'Content & Thought Leadership', description: 'Do you produce content that positions you as an authority findable by NA buyers?', program: 'horizon' },
+      { company: '6', play: 'AI Search Visibility', description: 'When buyers search your problem space in ChatGPT or Perplexity, do you appear?', program: 'horizon' },
+      { company: '7', play: 'Conversion Infrastructure', description: 'Demo booking, pricing clarity, calendar integration — can an interested buyer take the next step?', program: 'pivot' },
+      { company: '8', play: 'Competitive Differentiation', description: 'Does your public messaging clearly differentiate you from the alternatives a Canadian buyer would also evaluate?', program: 'pivot' },
     ],
-    metric: { value: 1.9, suffix: '/5', label: 'Average Canadian market readiness score' },
-    emphasis: null,
-    presenterNotes: 'Lead: Dan\n\n"We audited all 11 of your companies this week. These are your averages. Canadian readiness: 1.9 out of 5. AI search visibility: 2.0. Conversion infrastructure: 2.5."\n\nCohort tie-in: VEMOCO is the outlier on Canada readiness — they have a Toronto footprint, Canadian contact details, and procurement visibility. xTiles shows strong differentiation and content but weak Canada readiness. TryNdBuy and Omniful have real proof that isn\'t yet translated for Canadian buyers.\n\nTransition: "The reason this happens is that you assume what worked at home works here. Let\'s go one level deeper."\nTiming: ~2.5 min',
+    emphasis: 'This week, ask your meeting partners: which of these factors would make you hesitate?',
+    presenterNotes: 'Lead: Dan\n\n"Before we get into frameworks and strategy, I want to give you the buyer\'s checklist. These are the 8 factors that Canadian enterprise buyers — consciously or unconsciously — evaluate when they encounter a new international vendor."\n\n"We\'re not scoring you today. What I want you to do is keep these 8 factors in mind during every meeting you have for the rest of Sprint Week. After each meeting, ask yourself: would that buyer have concerns about any of these?"\n\n"Better yet — ask them directly. You\'ll be surprised how candid Canadian buyers are when you invite honest feedback."\n\nWalk through the 8 cards briefly — 10-15 seconds each. Frame each as a question the buyer is silently asking, not a score.\n\nTransition: "Now let me show you how to use this framework actively during Sprint Week — and what you\'ll receive from us after."\nTiming: ~3 min',
   },
-
-  // ═══════════════════════════════════════════════════════════
-  // PMF AS FOUNDATION (Slides 4–8)
-  // ═══════════════════════════════════════════════════════════
 
   {
     id: 4,
+    section: 'opening',
+    title: 'Using This Framework',
+    layout: 'thesis-with-example',
+    surface: 'light',
+    cognitiveJob: 'orient',
+    headline: 'How to Pressure-Test\nYour Own Readiness',
+    body: [
+      'Use these 8 factors as a self-assessment lens during your Sprint Week meetings.',
+      'After each meeting, score yourself honestly: where would that buyer have hesitated?',
+      'The most valuable feedback comes from the people you\'re meeting this week — mentors, potential partners, and prospective buyers who know the Canadian market.',
+    ],
+    emphasis: 'You will each receive your individual readiness report early next week, along with an invitation to book a 1:1 with Dan to review your results and build your action plan together.',
+    example: {
+      title: 'Your Sprint Week homework',
+      body: 'After each meeting this week, note which of the 8 factors felt like a gap. By Friday, you\'ll have real market feedback — not just an audit, but buyer-validated insight. Bring those notes to your 1:1.',
+    },
+    presenterNotes: 'Lead: Dan\n\n"I don\'t want you to take my word for where your gaps are. I want you to discover them through the meetings our team has set up for you this week."\n\n"After each meeting, take 2 minutes and ask yourself: which of those 8 factors would have given that buyer pause? Write it down. By Friday you\'ll have real, market-validated data."\n\n"And here\'s what\'s coming from our side: early next week, you\'ll each receive an individual readiness report. It\'s a detailed assessment across all 8 categories, specific to your company. Along with that, you\'ll get a link to book a 1:1 session with me where we\'ll review the results together and build your specific action plan."\n\n"The reason I\'m sharing those reports after Sprint Week rather than today is that I want you to form your own impressions first. Your meetings this week are the most valuable data source — more valuable than any audit."\n\nTransition: "Now, before we talk about the Canadian market specifically, let\'s go one level deeper into the foundation everything else rests on."\nTiming: ~2.5 min',
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // PMF AS FOUNDATION (Slides 5–8)
+  // ═══════════════════════════════════════════════════════════
+
+  {
+    id: 5,
     section: 'pmf',
     title: 'PMF First',
     layout: 'section-divider',
@@ -95,7 +118,7 @@ export const SLIDES = [
   },
 
   {
-    id: 5,
+    id: 6,
     section: 'pmf',
     title: 'The PMF Test',
     layout: 'process',
@@ -107,12 +130,12 @@ export const SLIDES = [
       { number: '?', label: 'Somewhat disappointed', description: 'Room to improve' },
       { number: '?', label: 'Not disappointed', description: 'PMF not yet proven' },
     ],
-    emphasis: '40%+ "very disappointed" = strong PMF signal',
+    emphasis: '40%+ "very disappointed" = strong PMF signal. Start adapting these questions for your industry and testing them in your meetings this week.',
     presenterNotes: 'Lead: Dan\n\n"This is Rahul Vora\'s framework from Superhuman. PMF isn\'t a gut feeling. It\'s measurable. You survey active users and ask: How would you feel if you could no longer use our product? If less than 40% say \'very disappointed,\' you don\'t have PMF yet."\n\n"For this cohort: run this test with your first North American pilot customers. Don\'t ask \'do you like it?\' Ask \'would you be very disappointed if we took it away?\'"\n\nCohort tie-ins: xTiles should test the Canadian team-buyer hypothesis, not just existing prosumer users. Quanscient and WIDMO should test Canadian enterprise stakeholders. Omniful and TryNdBuy should isolate North American buyer segments.\n\nTransition: "The power of this framework is not just the score. It\'s what you do with the answers."\nTiming: ~3 min',
   },
 
   {
-    id: 6,
+    id: 7,
     section: 'pmf',
     title: 'Four PMF Questions',
     layout: 'card-grid',
@@ -129,7 +152,7 @@ export const SLIDES = [
   },
 
   {
-    id: 7,
+    id: 8,
     section: 'pmf',
     title: 'SaaS Apocalypse',
     layout: 'thesis-with-example',
@@ -145,27 +168,8 @@ export const SLIDES = [
     presenterNotes: 'Lead: Dan\n\n"We are entering what some call the \'SaaS Apocalypse.\' The real threat isn\'t that SaaS is dead — it\'s that shallow, easy-to-replicate products are increasingly vulnerable."\n\nCohort tie-ins: "Fermi Dev — your moat isn\'t the dashboard, it\'s encoding complex manufacturing workflows that an intern with ChatGPT can\'t safely replicate. Quanscient — your moat is simulation depth, not \'AI.\' WIDMO — hard-to-reproduce subsurface insight and deployment credibility. xTiles needs to articulate team workflow and business outcomes more clearly."\n\nTransition: "So you need defensible PMF. But even with a great product, how you package it for Canada changes everything."\nTiming: ~3 min',
   },
 
-  {
-    id: 8,
-    section: 'pmf',
-    title: 'Enterprise Translation Gap',
-    layout: 'thesis-with-example',
-    surface: 'light',
-    cognitiveJob: 'dramatize',
-    headline: 'Strong Product \u2260\nEnterprise Trust',
-    body: [
-      'If your homepage talks to end users, enterprise buyers, partners, and investors all at once -- it lands with none of them.',
-    ],
-    emphasis: 'A real pattern from this cohort\'s audits: companies scoring 4/5 on content & differentiation scored 2/5 on enterprise buyer clarity.',
-    example: {
-      title: 'The Enterprise Translation Gap',
-      body: 'A homepage that speaks beautifully to individual users -- designers, productivity enthusiasts, technical practitioners -- but when a Canadian VP of Product or Head of Operations lands on that same page, they don\'t see an enterprise solution. They see a personal tool. The product might be incredible for teams, but the story being told is an individual story. In a new market with zero brand recognition, that dilution is fatal.',
-    },
-    presenterNotes: 'New slide -- see printed speaker notes for full talking track.',
-  },
-
   // ═══════════════════════════════════════════════════════════
-  // WHAT CHANGES IN CANADA (Slides 9–14)
+  // WHAT CHANGES IN CANADA (Slides 9–13)
   // ═══════════════════════════════════════════════════════════
 
   {
@@ -187,24 +191,6 @@ export const SLIDES = [
   {
     id: 10,
     section: 'canada',
-    title: 'Home vs. North America',
-    layout: 'table',
-    surface: 'light',
-    cognitiveJob: 'compare',
-    headline: 'What Changes\nWhen You Cross the Border',
-    tableData: [
-      { company: 'Narrative', target: 'Home: Product-first --> NA: Vision & ROI-first', program: 'horizon' },
-      { company: 'Sales Motion', target: 'Home: Relationship-driven --> NA: Digital-first, speed-to-value', program: 'horizon' },
-      { company: 'Trust', target: 'Home: Home-country traction --> NA: Local proof & partners', program: 'pivot' },
-      { company: 'Compliance', target: 'Home: Back-office detail --> NA: Front-of-site marketing asset', program: 'pivot' },
-    ],
-    tableHeaders: ['Dimension', 'What Changes'],
-    presenterNotes: 'New slide -- see printed speaker notes for full talking track.',
-  },
-
-  {
-    id: 11,
-    section: 'canada',
     title: 'Credibility Framework',
     layout: 'process',
     surface: 'light',
@@ -220,25 +206,24 @@ export const SLIDES = [
   },
 
   {
-    id: 12,
+    id: 11,
     section: 'canada',
-    title: 'Cohort Reality Check',
-    layout: 'table',
+    title: 'Credibility Self-Assessment',
+    layout: 'process',
     surface: 'light',
-    cognitiveJob: 'prove',
-    headline: 'The Cohort\'s\nCredibility Gap',
-    tableData: [
-      { company: 'Visibility (AI search)', target: '2.0 / 5 — 9 of 11 scored 2 or below', program: 'horizon' },
-      { company: 'Trust (social proof)', target: '2.6 / 5 — 10 of 11 scored 3 or below', program: 'horizon' },
-      { company: 'Conversion', target: '2.5 / 5 — No company scored above 3', program: 'pivot' },
-      { company: 'Canada readiness', target: '1.9 / 5 — 10 of 11 scored 2 or below', program: 'pivot' },
+    cognitiveJob: 'explain',
+    headline: 'Score Yourself —\nThen Ask Your Mentors',
+    processSteps: [
+      { number: '1', label: 'Visibility', description: 'Can a Canadian buyer find you without already knowing your name? Search your problem space in ChatGPT — do you appear?' },
+      { number: '2', label: 'Trust Signals', description: 'Does your public surface show proof that works in Canada? Named references, local partners, compliance signals, Canadian-relevant case studies?' },
+      { number: '3', label: 'Conversion Readiness', description: 'Can an interested Canadian buyer take the next step right now? Clear booking path, CAD pricing, EST/PST availability, enterprise-grade onboarding?' },
     ],
-    tableHeaders: ['Credibility Layer', 'Cohort Score'],
-    presenterNotes: 'Lead: Dan\n\n"Visibility: average AI search score is 2.0. Nine of eleven companies can only be found if the buyer already knows your brand name."\n\n"Trust: 2.6. Several of you have real proof that simply isn\'t visible on your public-facing assets."\n\n"Conversion: 2.5. After a strong meeting this week, the next step should never be \'email us and wait.\' It should be \'book the Canada discovery call now.\'"\n\n"Canada readiness: 1.9. Universal gap. Good news: fixable — some fixes can happen this week."\n\nTransition: "North American buyer behavior explains exactly why these gaps matter."\nTiming: ~2.5 min',
+    emphasis: 'Be honest with yourself. Then ask your Sprint Week mentors: "If you were evaluating us as a vendor, which layer would give you pause?"',
+    presenterNotes: 'Lead: Dan\n\n"This is the credibility framework in action. I want you to score yourself right now — not for me, for you."\n\n"Layer 1: Visibility. Go to ChatGPT or Perplexity and search your problem space in Canada. Do you show up? If a buyer has to already know your brand name to find you, you\'re invisible."\n\n"Layer 2: Trust. Look at your website, your LinkedIn, your public surface. If a Canadian procurement team pulled it up after a great meeting, would they see proof that works here? Or would they see proof from another market and have to guess whether it translates?"\n\n"Layer 3: Conversion. After a strong Sprint Week meeting, can that person book a follow-up call right now? Or do they hit a generic contact form that goes to a European timezone?"\n\n"Now here\'s the ask: in your next meeting, ask your mentor or potential partner directly — which of these three layers would give you pause about working with us? That honest answer is worth more than any score I could give you."\n\nTransition: "Let me show you what North American buyer research actually looks like — because it explains why these layers matter in this order."\nTiming: ~3 min',
   },
 
   {
-    id: 13,
+    id: 12,
     section: 'canada',
     title: 'Buyer Behavior',
     layout: 'comparison',
@@ -270,7 +255,7 @@ export const SLIDES = [
   },
 
   {
-    id: 14,
+    id: 13,
     section: 'canada',
     title: 'Buy Canadian',
     layout: 'comparison',
@@ -303,11 +288,11 @@ export const SLIDES = [
   },
 
   // ═══════════════════════════════════════════════════════════
-  // PARTNERSHIPS (Slides 15–16)
+  // PARTNERSHIPS (Slides 14–15)
   // ═══════════════════════════════════════════════════════════
 
   {
-    id: 15,
+    id: 14,
     section: 'partnerships',
     title: 'Trust Transfer',
     layout: 'section-divider',
@@ -323,7 +308,7 @@ export const SLIDES = [
   },
 
   {
-    id: 16,
+    id: 15,
     section: 'partnerships',
     title: 'Partnership Sequence',
     layout: 'process',
@@ -341,11 +326,11 @@ export const SLIDES = [
   },
 
   // ═══════════════════════════════════════════════════════════
-  // AI AS LEVERAGE (Slides 17–21)
+  // AI AS LEVERAGE (Slides 16–19)
   // ═══════════════════════════════════════════════════════════
 
   {
-    id: 17,
+    id: 16,
     section: 'ai-leverage',
     title: 'AI as Leverage',
     layout: 'section-divider',
@@ -363,24 +348,7 @@ export const SLIDES = [
   },
 
   {
-    id: 18,
-    section: 'ai-leverage',
-    title: 'Where AI Helps',
-    layout: 'card-grid',
-    surface: 'light',
-    cognitiveJob: 'explain',
-    headline: 'Where AI\nEarns Its Keep',
-    cards: [
-      { company: 'Research', play: 'Weeks -> Hours', description: 'Competitor scans, account intelligence, local buyer language, partner mapping.', program: 'horizon' },
-      { company: 'Personalization', play: '50 Deep > 5,000 Generic', description: 'Deep-context messages that reference prospect challenges, tech stack, and competitive position.', program: 'horizon' },
-      { company: 'Content Multiplication', play: '1 Insight -> 8 Assets', description: 'Blog, LinkedIn post, email sequence, pitch slide, landing page, comparison page, one-pager, use-case page.', program: 'pivot' },
-      { company: 'Pattern Recognition', play: 'Weekly Pipeline Readouts', description: 'What messages get opened? What segments respond? What objections keep appearing?', program: 'pivot' },
-    ],
-    presenterNotes: 'New slide -- see printed speaker notes for full talking track.',
-  },
-
-  {
-    id: 19,
+    id: 17,
     section: 'ai-leverage',
     title: 'AI Search',
     layout: 'thesis-with-metric',
@@ -389,60 +357,57 @@ export const SLIDES = [
     headline: 'If you\'re not in\nthe AI answer,\nyou don\'t exist.',
     body: [
       'Buyers use LLMs and AI overviews before they ever talk to sales.',
-      'This cohort averages 2.0/5 on AI search visibility.',
+      'Most international companies entering a new market are invisible to AI search in that market. The fix is faster than you think.',
       'If buyers must know your brand name to find you, you are still invisible.',
       'Fastest win: publish pages AI can cite — use-case pages, comparison pages, Canadian landing pages.',
     ],
     metric: { value: 94, suffix: '%', label: 'of B2B buyers use LLMs in purchase research' },
     emphasis: null,
-    presenterNotes: 'Lead: Dan\n\n"94% of B2B buyers use AI during research. 72% encounter AI Overviews. Vendor ranked first wins 80%. Only 14% still consult analyst reports — down 60% since 2022."\n\nCohort tie-ins: VEMOCO and TryNdBuy strongest at 3/5, still a gap. xTiles shows split between strong product identity and weak problem-space discovery.\n\nTransition: "Here\'s what AI is genuinely good for in your marketing motion."\nTiming: ~3 min',
+    presenterNotes: 'Lead: Dan\n\n"94% of B2B buyers now use AI during their purchase research. 72% encounter AI Overviews in their search results. The vendor ranked first on an AI-generated shortlist wins 80% of the time. Only 14% still consult analyst reports — down 60% since 2022."\n\n"Here\'s the challenge for international companies entering a new market: AI search engines synthesize from existing web content. If you don\'t have Canadian-relevant content published — Canadian case studies, Canadian landing pages, Canadian pricing — AI literally cannot recommend you for Canadian searches."\n\n"The good news: this is one of the fastest gaps to close. A well-structured Canadian use-case page can start appearing in AI results within weeks, not months."\n\n"Try it right now — search your problem space plus \'Canada\' in ChatGPT or Perplexity. See where you show up, and more importantly, who shows up instead."\n\nTransition: "This is exactly the kind of gap where AI can help you close it — which brings us to how to use AI strategically across your entire credibility framework."\nTiming: ~3 min',
   },
+
+  {
+    id: 18,
+    section: 'ai-leverage',
+    title: 'AI for Credibility',
+    layout: 'process',
+    surface: 'light',
+    cognitiveJob: 'explain',
+    headline: 'Using AI to Close\nYour Credibility Gaps',
+    processSteps: [
+      { number: '1', label: 'Visibility Layer', description: 'AI-optimized content for search discoverability. Canadian landing pages, comparison pages, problem-space articles that AI engines can cite.' },
+      { number: '2', label: 'Trust Layer', description: 'AI-assisted case study localization, social proof amplification, and Canadian-relevant proof point generation from your existing customer data.' },
+      { number: '3', label: 'Conversion Layer', description: 'AI-powered outbound personalization, automated follow-up sequences, and booking optimization tuned for Canadian enterprise buying cycles.' },
+    ],
+    emphasis: 'AI is the leverage layer, not the strategy layer. Identify your weakest credibility layer first — then point AI at it.',
+    presenterNotes: 'Lead: Dan\n\n"Remember the three-layer credibility framework? Visibility, Trust, Conversion. AI maps directly to each layer — but only after you know which layer is your bottleneck."\n\n"Visibility layer: AI can help you generate Canadian-specific content at speed. Use-case pages, comparison content, problem-space articles — the kind of pages that AI search engines cite when a Canadian buyer asks about your category. One founder I worked with went from invisible to top-3 in Perplexity results in 6 weeks by publishing 12 targeted pages."\n\n"Trust layer: You already have proof — customers, case studies, results. AI can help you translate and localize that proof for the Canadian context. Take a European case study and use AI to reframe it for Canadian procurement language, compliance requirements, and buyer expectations."\n\n"Conversion layer: AI-powered personalization means every outbound message can reference the prospect\'s specific context. AI can also optimize your booking flow, follow-up cadence, and proposal generation for Canadian enterprise norms."\n\n"The key insight: AI amplifies whatever you point it at. If you point it at the wrong layer, you\'ll move fast in the wrong direction. Identify your weakest layer first."\n\nTransition: "So here\'s your challenge for the rest of Sprint Week."\nTiming: ~3 min',
+  },
+
+  {
+    id: 19,
+    section: 'ai-leverage',
+    title: 'Sprint Week AI Challenge',
+    layout: 'card-grid',
+    surface: 'light',
+    cognitiveJob: 'decide',
+    headline: 'Build Your First\nAI Workflow This Week',
+    subtitle: 'The Sprint Week AI Challenge',
+    cards: [
+      { company: 'Step 1', play: 'Pick Your Weakest Layer', description: 'From the credibility self-assessment: is your biggest gap in Visibility, Trust, or Conversion? That\'s your target.', program: 'horizon' },
+      { company: 'Step 2', play: 'Define the Input', description: 'What data or content do you already have? Existing case studies, customer quotes, product specs, competitor analysis?', program: 'horizon' },
+      { company: 'Step 3', play: 'Define the Output', description: 'What does the Canadian buyer need to see? A localized landing page? A Canadian-framed case study? A personalized outreach sequence?', program: 'pivot' },
+      { company: 'Step 4', play: 'Test It Before Friday', description: 'Build one AI workflow. Run it. Bring the output to your 1:1 next week — we\'ll review it together and design your full playbook.', program: 'pivot' },
+    ],
+    emphasis: 'One workflow. One credibility layer. One real output. That\'s the challenge.',
+    presenterNotes: 'Lead: Dan\n\n"Here\'s what I want you to do before you leave Toronto. Pick your weakest credibility layer — the one that came up most in your Sprint Week meetings. Then build one AI workflow that targets it."\n\n"Step 1: Be honest about which layer is your bottleneck. If you\'re not sure, ask your next mentor: \'If you were evaluating us as a vendor, where would you hesitate?\'"\n\n"Step 2: Look at what you already have. You\'re not starting from zero — you have customers, case studies, product data, and competitive intelligence from your home market."\n\n"Step 3: Define what a Canadian buyer needs to see. Not what you want to say — what they need to see to move forward."\n\n"Step 4: Build it. Use ChatGPT, Claude, Perplexity, whatever tool you\'re comfortable with. Create one real asset — a draft landing page, a localized case study, a personalized outreach email for a specific Canadian prospect you met this week."\n\n"Bring that output to your 1:1 with me next week. That\'s where we get specific — we\'ll review what you built, identify what\'s working, and design your full AI-powered go-to-market playbook together."\n\nTransition: "Let me leave you with three clear deliverables."\nTiming: ~3 min',
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // ACTION PLAN (Slides 20–21)
+  // ═══════════════════════════════════════════════════════════
 
   {
     id: 20,
-    section: 'ai-leverage',
-    title: 'AI Plays — Horizon',
-    layout: 'card-grid',
-    surface: 'light',
-    cognitiveJob: 'explain',
-    headline: 'Your Flagship AI Play',
-    subtitle: 'Horizon Companies',
-    cards: [
-      { company: 'Voltie', play: 'EV-Retrofit Opportunity Finder', description: 'Scan condo portfolios + local incentive programs to rank top 50 buildings by upgrade potential.', program: 'horizon' },
-      { company: 'SaMMY', play: 'Waterfront Prospect Map', description: 'Map marinas, ports, ESG initiatives across Ontario/BC. Score for pilot suitability.', program: 'horizon' },
-      { company: 'Quanscient', play: 'Simulation-Ready Account Briefs', description: 'Mine R&D projects from annual reports and patents. Draft pilot hypotheses for VPs of Engineering.', program: 'horizon' },
-      { company: 'VEMOCO', play: 'Workflow Impact Simulator', description: 'ROI calculator by fleet size and sector. Lead with "18 clicks → 3," not GPS.', program: 'horizon' },
-      { company: 'WIDMO', play: 'Site-Specific Pilot Proposals', description: 'Compile public geology and incident data per mine. Draft survey plans and risk-reduction narratives.', program: 'horizon' },
-      { company: 'xTiles', play: 'Competitive Positioning Scanner', description: 'Analyze Notion/Miro/Trello positioning. Find gaps for your Canadian enterprise wedge.', program: 'horizon' },
-    ],
-    presenterNotes: 'Lead: Dan\n\nWalk through each — 20–30 seconds per company.\n\n"Voltie — scan REIT portfolios and incentive programs. Find buildings mandated to install chargers. That\'s your target list."\n"SaMMY — map every marina and port, check ESG requirements, score for pilot readiness."\n"Quanscient — mine annual reports and patents. First email should be a pilot hypothesis, not a cold pitch."\n"VEMOCO — stop leading with GPS. Lead with workflow. Calculator > demo."\n"WIDMO — public geology data → site-specific survey proposal. Look like you\'ve done the homework."\n"xTiles — find the white space in Notion/Miro/Trello positioning."\n\nTransition: "And for the Pivot companies..."\nTiming: ~3 min',
-  },
-
-  {
-    id: 21,
-    section: 'ai-leverage',
-    title: 'AI Plays — Pivot',
-    layout: 'card-grid',
-    surface: 'light',
-    cognitiveJob: 'explain',
-    headline: 'Your Flagship AI Play',
-    subtitle: 'Pivot Companies',
-    cards: [
-      { company: 'Fermi Dev', play: 'Factory Process-Chaos Scanner', description: 'Crawl job listings for "manual reporting," "legacy MES." Auto-score accounts by pain intensity.', program: 'pivot' },
-      { company: 'Aibo', play: 'Insurance Journey-Gap Teardown', description: 'Map quote-to-claim flows from carrier websites. Generate "future state" blueprints.', program: 'pivot' },
-      { company: 'Omniful', play: 'Stack Audit & Migration Playbook', description: 'Auto-generate architecture reports. The kind of artifact that gets forwarded to CFOs.', program: 'pivot' },
-      { company: 'MonkTrader', play: 'Broker AI-Readiness Scoring', description: 'Score brokers on digital maturity. Generate tailored partnership pitches per broker.', program: 'pivot' },
-      { company: 'TryNdBuy', play: 'Catalog Automation ROI Calculator', description: 'Estimate manual content cost by SKU count. Generate retailer-specific ROI briefs.', program: 'pivot' },
-    ],
-    presenterNotes: 'Lead: Dan\n\n"For Pivot companies — the challenge is trust. North American buyers respond to perceived risk more than features."\n\n"Fermi Dev — manufacturers advertise their pain in job listings. AI finds those signals at scale."\n"Aibo — map where carrier customer journeys break. Generate future-state blueprints."\n"Omniful — architecture assessments get forwarded to CFOs."\n"MonkTrader — score which brokers are worth pitching."\n"TryNdBuy — Amazon and Flipkart as references. Show Canadian retailers their manual catalog costs."\n\n"These are GTM accelerants. Pick one."\n\nTransition: "Let\'s translate this into what you leave with."\nTiming: ~3 min',
-  },
-
-  // ═══════════════════════════════════════════════════════════
-  // ACTION PLAN & CLOSE (Slides 22–23)
-  // ═══════════════════════════════════════════════════════════
-
-  {
-    id: 22,
     section: 'action-plan',
     title: 'Action Plan',
     layout: 'action-summary',
@@ -452,26 +417,26 @@ export const SLIDES = [
     actions: [
       {
         number: '1',
-        title: 'Canada PMF validation plan',
-        description: 'How will you test the "very disappointed" threshold here? Use Sprint Week meetings as your first data points.',
+        title: 'Collect Sprint Week feedback',
+        description: 'After every remaining meeting, ask: "Which of the 8 credibility factors would give you pause about us?" Write down the answers.',
       },
       {
         number: '2',
-        title: 'Credibility gap assessment',
-        description: 'Score yourself: Visibility, Trust Signals, Conversion Readiness. The gap you find is your first marketing project.',
+        title: 'Complete the AI Challenge',
+        description: 'Pick your weakest credibility layer. Build one AI workflow that targets it. Create one real Canadian-market asset before Friday.',
       },
       {
         number: '3',
-        title: 'One AI workflow for Week 1',
-        description: 'Pick your flagship play. Map inputs, outputs, first target list. Run it in your first week back. Not ten. One.',
+        title: 'Book your 1:1',
+        description: 'Individual audit reports go out early next week. Book your 1:1 with Dan to review your results, your Sprint Week feedback, and your AI workflow output.',
       },
     ],
-    cta: 'Book a 1:1 with Dan before Friday.',
-    presenterNotes: 'Lead: Dan\n\n"You have one day left of Sprint Week. Here are your three deliverables."\n\n"First: a PMF validation plan for Canada. Who exactly are you testing with, and what evidence would tell you the pull is real here? Use the meetings you\'ve already had this week as your first data points."\n\n"Second: a credibility gap assessment using the three-layer framework. Score yourself on visibility, trust signals, and conversion readiness. The gap you find is your first marketing project when you get home."\n\n"Third: one AI workflow. Not ten. One. Pick the flagship play from the slide with your name on it. Map out the inputs, outputs, and first target list. Run it in your first week back."\n\n"Book time with me before Friday — whether it\'s PMF, conversion, partnerships, or AI workflows."\n\n"After Sprint Week, you move into Surge. You\'ll have fractional executives and 90-day roadmaps to actually execute all of this. You\'re not doing it alone."\n\nTiming: ~3 min',
+    cta: 'Individual reports + 1:1 booking links go out Monday. Come prepared.',
+    presenterNotes: 'Lead: Dan\n\n"You have one day left of Sprint Week. Here are your three deliverables."\n\n"First: collect real feedback. In every remaining meeting, ask the person across the table which of the 8 credibility factors would give them pause. Write it down. This is the most valuable market research you can do — and it\'s free."\n\n"Second: take the AI challenge. You now know the credibility framework. You know what AI is good at. Pick your weakest layer and build one workflow that creates one real asset for the Canadian market. Not ten things. One thing, done well."\n\n"Third: book your 1:1. Early next week, you\'ll each receive your individual readiness report — a detailed assessment across all 8 factors, specific to your company. Along with it, you\'ll get a link to book time with me. Bring your Sprint Week feedback notes and your AI challenge output. That\'s where we get specific."\n\n"After Sprint Week, you move into Surge — 90-day execution with fractional executives and TBDC\'s advisory network. But the insight-gathering starts now."\n\nTiming: ~2.5 min',
   },
 
   {
-    id: 23,
+    id: 21,
     section: 'action-plan',
     title: 'Close',
     layout: 'hero',
@@ -479,11 +444,11 @@ export const SLIDES = [
     cognitiveJob: 'decide',
     headline: 'Questions?',
     body: [
-      'Dan — PMF, positioning, partnerships, AI workflows',
-      'Book a 1:1 before Friday.',
+      'Dan — credibility framework, AI workflows, go-to-market planning',
+      'Individual reports + 1:1 booking links go out Monday.',
     ],
     emphasis: null,
     cta: null,
-    presenterNotes: 'Lead: Dan\n\n"I\'d love to use the rest of this time for your questions — especially where you feel tension between product strength and market-entry friction."\n\n"And please book time with me before Friday. That\'s where we get specific about your company, not just the cohort patterns."\n\nClose: "What got you into this room is traction. The next step is making that traction legible and credible to the next Canadian buyer."\n\nTiming: ~1 min close, then 15 min Q&A',
+    presenterNotes: 'Lead: Dan\n\n"We\'ve got about 15 minutes for questions. I\'d especially love to hear from anyone who discovered something surprising in the credibility self-assessment — or who\'s already thinking about which layer to target for the AI challenge."\n\n"And if your question is company-specific and you\'d rather not ask it in front of the room, that\'s exactly what the 1:1 sessions are for. Those invitations go out Monday along with your individual reports."\n\n"One closing thought: what got you into this room is real traction — real products, real customers, real technical depth. The work ahead isn\'t building something new. It\'s making what you\'ve already built legible and credible to the Canadian buyer who\'s looking for exactly what you do but doesn\'t know you exist yet. That\'s a closeable gap. And now you have the framework, the feedback channels, and the AI leverage to close it."\n\nTiming: ~1 min close, then 15 min Q&A',
   },
 ];
